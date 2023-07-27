@@ -1,8 +1,7 @@
-#SelenideBoilerplate (Java + Selenide + TestNG + Allure)
+#Casino Test Automation Framework
 
 Simple template for automated end-to-end testing.
 
-Article - https://habr.com/ru/post/504408/
 
 Run test - `mvn test -Dbrowser=chrome -Dheadless=1` or just `mvn test`
 
