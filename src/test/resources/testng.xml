@@ -3,12 +3,12 @@
 <suite name="SelenideAutoTests" verbose="1">
 
     <listeners>
-        <listener class-name="A_BaseTestListener"/>
+        <listener class-name="casino.A_BaseTestListener"/>
     </listeners>
 
     <test name="Tests">
         <classes>
-            <class name="ExampleTest" />
+            <class name="casino.mga.LogInTests" />
         </classes>
     </test>
 

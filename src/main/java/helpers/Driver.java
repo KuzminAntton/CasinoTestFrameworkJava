@@ -4,8 +4,11 @@ import app.AppConfig;
 import com.codeborne.selenide.*;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -15,7 +18,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
+
 public class Driver {
+
+    private static String driverPath = "driver/";
 
     public static void initDriver() {
 
@@ -24,6 +31,12 @@ public class Driver {
         TestConfig.initConfig();
 
         // Set settings for selenide browser
+
+        System.setProperty("webdriver.chrome.driver", driverPath + "chromedriver");
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        options.addArguments("disable-blink-features=AutomationControlled");
 
         Configuration.pageLoadStrategy = "eager";
         Configuration.browserSize = "1920x1080";
@@ -40,6 +53,8 @@ public class Driver {
         {
             case "chrome":
                 Configuration.browser = Browsers.CHROME;
+                WebDriver webDriver = new ChromeDriver(options);
+                setWebDriver(webDriver);
                 break;
             case "firefox":
                 Configuration.browser = Browsers.FIREFOX;
@@ -92,8 +107,8 @@ public class Driver {
         currentDriver().manage().window().setSize(new Dimension(width, height));
     }
 
-    public static void clearCookies() {
-        open(AppConfig.baseUrl);
+    public static void clearCookies(String URL) {
+        open(URL);
         Selenide.clearBrowserCookies();
         Selenide.clearBrowserLocalStorage();
     }
