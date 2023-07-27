@@ -9,11 +9,14 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +26,18 @@ import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
 public class Driver {
 
     private static String driverPath = "driver/";
+
+//    public static void initBrowserStack() throws MalformedURLException {
+//          String BROWSERSTACK_USERNAME = "antonkuzmin_75ekFm";
+//          String BROWSERSTACK_ACCESS_KEY = "T9oPvCjsGpirmprvbMZh";
+////          String BROWSERSTACK_URL = "https://" + BROWSERSTACK_USERNAME + ":" + BROWSERSTACK_ACCESS_KEY + "@hub-cloud.browserstack.com/wd/hub";
+//
+//        Configuration.browser = "chrome"; // Specify the desired browser (e.g., "chrome", "firefox", etc.)
+//        Configuration.browserVersion = "latest"; // Specify the desired browser version
+//        Configuration.remote = "https://" + BROWSERSTACK_USERNAME + ":" + BROWSERSTACK_ACCESS_KEY + "@hub-cloud.browserstack.com/wd/hub";
+//
+////        WebDriver driver = new RemoteWebDriver(new URL(BROWSERSTACK_URL), caps);
+//    }
 
     public static void initDriver() {
 

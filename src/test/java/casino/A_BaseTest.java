@@ -11,6 +11,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.asserts.SoftAssert;
 
+import java.net.MalformedURLException;
+
 public class A_BaseTest {
 
     protected App app;
@@ -18,8 +20,9 @@ public class A_BaseTest {
     protected Logger logger;
 
     @BeforeClass
-    public void setUp() {
+    public void setUp() throws MalformedURLException {
 
+//        Driver.initBrowserStack();
         Driver.initDriver();
 
         app = new App();
