@@ -1,34 +1,38 @@
 version: 2.1
-
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:8-jdk-browsers  # This image includes browsers support for Selenide
+      - image: circleci/openjdk:8-jdk  # Choose the appropriate JDK version based on your project requirements
     steps:
       - checkout
+
+      # Install Java and set up Java environment
       - run:
-          name: Install Java and other dependencies
+          name: Install Java
           command: |
-            sudo gpg --keyserver keyserver.ubuntu.com --recv-keys 8AC3B29174885C03
-            sudo gpg --export --armor 8AC3B29174885C03 | sudo apt-key add -
-            sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 4EB27DB2A3B88B8B
             sudo apt-get update
-            sudo apt-get install -y software-properties-common
-            sudo add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
-            sudo apt-get update
-            sudo apt-get install -y adoptopenjdk-8-hotspot  # Install AdoptOpenJDK 8
-            sudo apt-get install -y maven                # Install Maven (if your project uses it)
-            # Add other necessary commands for installing build tools or dependencies
+            sudo apt-get install -y openjdk-8-jdk  # Install the appropriate JDK version
+            echo 'export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64' >> $BASH_ENV
+            echo 'export PATH=$JAVA_HOME/bin:$PATH' >> $BASH_ENV
+            source $BASH_ENV
 
       - run:
-          name: Run Selenide tests
+          name: Install Chrome browser for Selenide
           command: |
-            export DISPLAY=:99
-            Xvfb :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
-            mvn clean test  # Replace with your build command (e.g., gradle build, etc.)
+            wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+            sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+            sudo apt-get update && sudo apt-get install -y google-chrome-stable
 
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
+      - run:
+          name: Install ChromeDriver for Selenide
+          command: |
+            CHROME_DRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+            wget -N https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip -P ~/
+            unzip -o ~/chromedriver_linux64.zip -d ~/
+            sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
+            sudo chmod +x /usr/local/bin/chromedriver
+
+      - run:
+          name: Install dependencies and run tests
+          command: |
+            mvn clean test  # Replace with your build command (e.g., gradle test, etc.)
