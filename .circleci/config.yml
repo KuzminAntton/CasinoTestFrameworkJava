@@ -9,6 +9,8 @@ jobs:
       - run:
           name: Install Java and other dependencies
           command: |
+            sudo gpg --keyserver keyserver.ubuntu.com --recv-keys 8AC3B29174885C03
+            sudo gpg --export --armor 8AC3B29174885C03 | sudo apt-key add -
             sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 4EB27DB2A3B88B8B
             sudo apt-get update
             sudo apt-get install -y software-properties-common
