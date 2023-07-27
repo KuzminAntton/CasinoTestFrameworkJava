@@ -1,23 +1,31 @@
+version: 2.1
 
-build:
-  docker:
-    - image: circleci/openjdk:8-jdk-browsers  # This image includes browsers support for Selenide
-  steps:
-    - checkout
-    - run:
-        name: Install Java and other dependencies
-        command: |
-          sudo apt-get update
-          sudo apt-get install -y software-properties-common
-          sudo add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
-          sudo apt-get update
-          sudo apt-get install -y adoptopenjdk-8-hotspot  # Install AdoptOpenJDK 8
-          sudo apt-get install -y maven                # Install Maven (if your project uses it)
-          # Add other necessary commands for installing build tools or dependencies
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:8-jdk-browsers  # This image includes browsers support for Selenide
+    steps:
+      - checkout
+      - run:
+          name: Install Java and other dependencies
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y software-properties-common
+            sudo add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
+            sudo apt-get update
+            sudo apt-get install -y adoptopenjdk-8-hotspot  # Install AdoptOpenJDK 8
+            sudo apt-get install -y maven                # Install Maven (if your project uses it)
+            # Add other necessary commands for installing build tools or dependencies
 
-    - run:
-        name: Run Selenide tests
-        command: |
-          export DISPLAY=:99
-          Xvfb :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
-          mvn clean test  # Replace with your build command (e.g., gradle build, etc.)
+      - run:
+          name: Run Selenide tests
+          command: |
+            export DISPLAY=:99
+            Xvfb :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
+            mvn clean test  # Replace with your build command (e.g., gradle build, etc.)
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
