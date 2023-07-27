@@ -25,5 +25,5 @@ jobs:
       - run:
           name: Install Maven and run tests
           command: |
-            sudo apt-get install -y maven
+            sudo apt-get install -y maven  # Install Maven
             mvn clean test  # Replace with your build command (e.g., gradle test, etc.)
