@@ -42,7 +42,7 @@ public class Driver {
     public static void initDriver() {
 
         // Get settings from command line
-
+        wait(10);
         TestConfig.initConfig();
 
         // Set settings for selenide browser
