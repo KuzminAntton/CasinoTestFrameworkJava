@@ -9,8 +9,9 @@ jobs:
       - run:
           name: Install Chrome browser for Selenide
           command: |
+            sudo apt-get update && sudo apt-get install -y wget curl
             wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-            sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+            echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google.list
             sudo apt-get update && sudo apt-get install -y google-chrome-stable
 
       - run:
@@ -25,5 +26,5 @@ jobs:
       - run:
           name: Install Maven and run tests
           command: |
-            sudo apt-get install -y maven  # Install Maven
-            mvn clean test  # Replace with your build command (e.g., gradle test, etc.)
+            sudo apt-get install -y maven
+            mvn clean test
