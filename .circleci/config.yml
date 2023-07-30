@@ -2,10 +2,12 @@ version: 2.1
 
 jobs:
   build:
-    docker:
-      - image: circleci/openjdk:11  # Use the appropriate Java version here
+    executors:
+      openjdk11:
+        docker:
+          - image: circleci/openjdk:11  # Use the appropriate Java version here
 
-    working_directory: ~/CasinoTestFrameworkJava
+#    working_directory: ~/CasinoTestFrameworkJava
 
     steps:
       - checkout  # Check out your Java project from version control
