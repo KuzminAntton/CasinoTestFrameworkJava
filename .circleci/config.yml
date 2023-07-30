@@ -9,6 +9,7 @@ jobs:
 
     steps:
       - checkout  # Check out your Java project from version control
+        
         # Install Chrome and ChromeDriver in a Docker container
           - run:
           name: Install Chrome and ChromeDriver
