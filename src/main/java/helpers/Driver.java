@@ -49,9 +49,10 @@ public class Driver {
 
         System.setProperty("webdriver.chrome.driver", driverPath + "chromedriver");
 
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        options.addArguments("disable-blink-features=AutomationControlled");
+        ChromeOptions options = new ChromeOptions()
+                .addArguments("--remote-allow-origins=*")
+                .addArguments("--lang=en_US")
+                .addArguments("disable-blink-features=AutomationControlled");
 
         Configuration.pageLoadStrategy = "eager";
         Configuration.browserSize = "1920x1080";
