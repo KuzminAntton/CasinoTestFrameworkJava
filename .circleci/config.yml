@@ -15,28 +15,28 @@ jobs:
       - run:
           name: Install Maven
           command: |
-            mvn --version  # Or any other installation commands if necessary
+            ./mvnw --version  # Or any other installation commands if necessary
 
       # Compile the Java code using the appropriate build tool (e.g., Maven, Gradle)
       # Example for Maven:
       - run:
           name: Compile Java code
           command: |
-            mvn compile  # Or any other compilation command specific to your build tool
+            ./mvnw compile  # Or any other compilation command specific to your build tool
 
       # Run your tests
       # Example for Maven:
       - run:
           name: Run tests
           command: |
-            mvn test  # Or any other test execution command specific to your build tool
+            ./mvnw test  # Or any other test execution command specific to your build tool
 
       # Generate Allure report
       # Example for Maven:
       - run:
           name: Generate Allure report
           command: |
-            mvn allure:report
+            ./mvnw allure:report
 
       # Other steps as needed for your build process
 
