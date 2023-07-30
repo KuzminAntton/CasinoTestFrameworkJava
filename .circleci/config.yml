@@ -27,4 +27,4 @@ jobs:
           name: Install Maven and run tests
           command: |
             sudo apt-get install -y maven
-            mvn clean test
+            mvn clean install
