@@ -46,7 +46,7 @@ jobs:
       - run:
           name: Run tests
           command: |
-            ./mvnw test  # Or any other test execution command specific to your build tool
+            ./mvnw test -Dbrowser=chrome -Dheadless=1
 
       # Generate Allure report
       # Example for Maven:
