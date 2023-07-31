@@ -39,45 +39,61 @@ public class Driver {
 ////        WebDriver driver = new RemoteWebDriver(new URL(BROWSERSTACK_URL), caps);
 //    }
 
-    public static void initDriver() {
+    public static void initDriver() throws MalformedURLException {
 
         // Get settings from command line
         TestConfig.initConfig();
 
         // Set settings for selenide browser
-
-        System.setProperty("webdriver.chrome.driver", driverPath + "chromedriver");
+        String seleniumHubUrl = "http://localhost:4444/wd/hub";
+        URL hubUrl = new URL(seleniumHubUrl);
 
         ChromeOptions options = new ChromeOptions()
                 .addArguments("--remote-allow-origins=*")
                 .addArguments("--lang=en_US")
+                .addArguments("--headless")
                 .addArguments("disable-blink-features=AutomationControlled");
 
-        Configuration.pageLoadStrategy = "eager";
-        Configuration.browserSize = "1920x1080";
-        Configuration.holdBrowserOpen = false;
-        Configuration.screenshots = false;
+        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 
-        if(TestConfig.isHeadless()) {
-            Configuration.headless = true;
-        } else {
-            Configuration.headless = false;
-        }
+        Configuration.remote = hubUrl.toString();
+        Configuration.browserCapabilities = capabilities;
 
-        switch (TestConfig.browser)
-        {
-            case "chrome":
-                Configuration.browser = Browsers.CHROME;
-                WebDriver webDriver = new ChromeDriver(options);
-                setWebDriver(webDriver);
-                break;
-            case "firefox":
-                Configuration.browser = Browsers.FIREFOX;
-                break;
-            default:
-                Configuration.browser = Browsers.CHROME;
-                break;
-        }
+//
+//        Configuration.pageLoadStrategy = "eager";
+//        Configuration.browserSize = "1920x1080";
+//        Configuration.holdBrowserOpen = false;
+//        Configuration.screenshots = false;
+
+        WebDriver driver = new RemoteWebDriver(hubUrl, capabilities);
+
+//        System.setProperty("webdriver.chrome.driver", driverPath + "chromedriver");
+
+
+
+
+
+//        if(TestConfig.isHeadless()) {
+//            Configuration.headless = true;
+//        } else {
+//            Configuration.headless = false;
+//        }
+
+//        switch (TestConfig.browser)
+//        {
+//            case "chrome":
+//                Configuration.browser = Browsers.CHROME;
+//                WebDriver webDriver = new ChromeDriver(options);
+//                setWebDriver(webDriver);
+//                break;
+//            case "firefox":
+//                Configuration.browser = Browsers.FIREFOX;
+//                break;
+//            default:
+//                Configuration.browser = Browsers.CHROME;
+//                break;
+//        }
     }
 
     public static WebDriver currentDriver() {

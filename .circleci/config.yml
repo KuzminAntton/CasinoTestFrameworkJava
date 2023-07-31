@@ -55,6 +55,19 @@ jobs:
           name: Generate Allure report
           command: |
             ./mvnw allure:report
+            
+                # Start Selenium Hub on localhost:4444
+      - run:
+          name: Start Selenium Hub
+          command: |
+            docker run -d -p 4444:4444 selenium/hub:3.141.59
+
+      # Start Selenium Node (WebDriver) for Chrome
+      - run:
+          name: Start Selenium Node (Chrome)
+          command: |
+            docker run -d -e HUB_HOST=host.docker.internal -e HUB_PORT=4444 selenium/node-chrome:3.141.59
+
 
       # Other steps as needed for your build process
 
