@@ -1,5 +1,6 @@
-package app.pages;
+package app.pages.mga;
 
+import app.pages.BasePage;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import helpers.Driver;
