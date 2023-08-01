@@ -40,14 +40,7 @@ jobs:
 #      - run:
 #          name: Compile Java code
 #          command: |
-#            ./mvnw compile  # Or any other compilation command specific to your build tool
 
-      # Run your tests
-      # Example for Maven:
-      - run:
-          name: Run tests
-          command: |
-            ./mvnw test -Dbrowser=chrome -Dheadless=1
 
       # Generate Allure report
       # Example for Maven:
@@ -68,7 +61,14 @@ jobs:
           command: |
             docker run -d -e HUB_HOST=host.docker.internal -e HUB_PORT=4444 selenium/node-chrome:3.141.59
 
+      #            ./mvnw compile  # Or any other compilation command specific to your build tool
 
+      # Run your tests
+      # Example for Maven:
+      - run:
+          name: Run tests
+          command: |
+            ./mvnw test -Dbrowser=chrome -Dheadless=1
       # Other steps as needed for your build process
 
 workflows:
