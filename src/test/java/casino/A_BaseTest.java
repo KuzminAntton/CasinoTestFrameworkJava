@@ -2,6 +2,7 @@ package casino;
 
 import app.App;
 import app.AppConfig;
+import com.codeborne.selenide.logevents.SelenideLogger;
 import helpers.Driver;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -23,6 +24,7 @@ public class A_BaseTest {
     public void setUp() throws MalformedURLException {
 
 //        Driver.initBrowserStack();
+//        SelenideLogger.addListener("CustomClickListener", new CustomClickListener());
         Driver.initDriver();
 
         app = new App();
