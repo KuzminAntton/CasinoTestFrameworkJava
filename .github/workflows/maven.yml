@@ -18,12 +18,11 @@ jobs:
         with:
           java-version: '11'
 
-#      - name: Cache Maven dependencies
-#        uses: actions/cache@v2
-#        with:
-#          path: ~/.m2/repository
-#          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+      - name: Cache Maven dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
 
       - name: Build and test
         run: ./mvnw test -Dbrowser=chrome -Dheadless=1 -Dremote=0
-

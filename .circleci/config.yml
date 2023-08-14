@@ -1,78 +1,78 @@
-version: 2.1
-
-jobs:
-  build:
-    docker:
-      - image: circleci/openjdk:11  # Use the appropriate Java version here
-      - image: selenium/standalone-chrome:3.11.0
-      - image: cimg/node:19.3.0-browsers
-    working_directory: ~/CasinoTestFrameworkJava
-
-    steps:
-      - checkout  # Check out your Java project from version control
-
-
-        # Install Chrome and ChromeDriver in a Docker container
-#      - run:
-#          name: Install Chrome and ChromeDriver
-#          command: |
-#            sudo apt-get update
-#            sudo apt-get install -y wget gnupg
-#            wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-#            echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
-#            sudo apt-get update
-#            sudo apt-get install -y google-chrome-stable
-#            LATEST_CHROMEDRIVER=$(wget -q -O - https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
-#            wget -q -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/$LATEST_CHROMEDRIVER/chromedriver_linux64.zip
-#            unzip /tmp/chromedriver.zip -d /tmp
-#            sudo mv /tmp/chromedriver /usr/local/bin/chromedriver
-#            sudo chmod +x /usr/local/bin/chromedriver
-
-      # Install any dependencies or build tools required (e.g., Maven, Gradle)
-      # Example for Maven:
-      - run:
-          name: Install Maven
-          command: |
-            ./mvnw --version  # Or any other installation commands if necessary
-
-#      # Compile the Java code using the appropriate build tool (e.g., Maven, Gradle)
+#version: 2.1
+#
+#jobs:
+#  build:
+#    docker:
+#      - image: circleci/openjdk:11  # Use the appropriate Java version here
+#      - image: selenium/standalone-chrome:3.11.0
+#      - image: cimg/node:19.3.0-browsers
+#    working_directory: ~/CasinoTestFrameworkJava
+#
+#    steps:
+#      - checkout  # Check out your Java project from version control
+#
+#
+#        # Install Chrome and ChromeDriver in a Docker container
+##      - run:
+##          name: Install Chrome and ChromeDriver
+##          command: |
+##            sudo apt-get update
+##            sudo apt-get install -y wget gnupg
+##            wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+##            echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
+##            sudo apt-get update
+##            sudo apt-get install -y google-chrome-stable
+##            LATEST_CHROMEDRIVER=$(wget -q -O - https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+##            wget -q -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/$LATEST_CHROMEDRIVER/chromedriver_linux64.zip
+##            unzip /tmp/chromedriver.zip -d /tmp
+##            sudo mv /tmp/chromedriver /usr/local/bin/chromedriver
+##            sudo chmod +x /usr/local/bin/chromedriver
+#
+#      # Install any dependencies or build tools required (e.g., Maven, Gradle)
 #      # Example for Maven:
 #      - run:
-#          name: Compile Java code
+#          name: Install Maven
 #          command: |
-
-
-      # Generate Allure report
-      # Example for Maven:
-      - run:
-          name: Generate Allure report
-          command: |
-            ./mvnw allure:report
-            
-#                 Start Selenium Hub on localhost:4444
+#            ./mvnw --version  # Or any other installation commands if necessary
+#
+##      # Compile the Java code using the appropriate build tool (e.g., Maven, Gradle)
+##      # Example for Maven:
+##      - run:
+##          name: Compile Java code
+##          command: |
+#
+#
+#      # Generate Allure report
+#      # Example for Maven:
 #      - run:
-#          name: Start Selenium Hub
+#          name: Generate Allure report
 #          command: |
-#            docker run -d -p 4444:4444 selenium/hub:3.141.59
-
-      # Start Selenium Node (WebDriver) for Chrome
+#            ./mvnw allure:report
+#
+##                 Start Selenium Hub on localhost:4444
+##      - run:
+##          name: Start Selenium Hub
+##          command: |
+##            docker run -d -p 4444:4444 selenium/hub:3.141.59
+#
+#      # Start Selenium Node (WebDriver) for Chrome
+##      - run:
+##          name: Start Selenium Node (Chrome)
+##          command: |
+##            docker run -d -e HUB_HOST=host.docker.internal -e HUB_PORT=4444 selenium/node-chrome:3.141.59
+#
+#      #            ./mvnw compile  # Or any other compilation command specific to your build tool
+#
+#      # Run your tests
+#      # Example for Maven:
 #      - run:
-#          name: Start Selenium Node (Chrome)
+#          name: Run tests
 #          command: |
-#            docker run -d -e HUB_HOST=host.docker.internal -e HUB_PORT=4444 selenium/node-chrome:3.141.59
-
-      #            ./mvnw compile  # Or any other compilation command specific to your build tool
-
-      # Run your tests
-      # Example for Maven:
-      - run:
-          name: Run tests
-          command: |
-            ./mvnw test -Dbrowser=chrome -Dheadless=1 -Dremote=0
-      # Other steps as needed for your build process
-
-workflows:
-  version: 2
-  build:
-    jobs:
-      - build
+#            ./mvnw test -Dbrowser=chrome -Dheadless=1 -Dremote=0
+#      # Other steps as needed for your build process
+#
+#workflows:
+#  version: 2
+#  build:
+#    jobs:
+#      - build
