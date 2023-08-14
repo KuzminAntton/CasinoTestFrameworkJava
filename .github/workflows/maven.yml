@@ -1,35 +1,29 @@
-name: Build and Test
+name: Java Maven Test
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    
-    container:
-      image: circleci/openjdk:11  # Use the appropriate Java version here
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Chrome and ChromeDriver
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wget gnupg
-          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-          echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
 
-      - name: Set up Maven
-        run: |
-          ./mvnw --version  # Or any other installation commands if necessary
+#      - name: Cache Maven dependencies
+#        uses: actions/cache@v2
+#        with:
+#          path: ~/.m2/repository
+#          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
 
-      - name: Generate Allure report
-        run: |
-          ./mvnw allure:report
+      - name: Build and test
+        run: ./mvnw test -Dbrowser=chrome -Dheadless=1 -Dremote=0
 
-      - name: Run tests
-        run: |
-          ./mvnw test -Dbrowser=chrome -Dheadless=1 -Dremote=0
