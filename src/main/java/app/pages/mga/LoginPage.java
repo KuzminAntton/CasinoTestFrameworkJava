@@ -1,8 +1,11 @@
-package app.pages;
+package app.pages.mga;
 
+import app.pages.BasePage;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import helpers.Driver;
+
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public class LoginPage extends BasePage {
@@ -11,6 +14,10 @@ public class LoginPage extends BasePage {
     public SelenideElement loginField = $("#uName");
     public SelenideElement passwordField = $("#uPass");
     public SelenideElement signInButton = $x("(//button[@type='submit'])[2]");
+
+    public SelenideElement loginErrorMessage = $("#login_error");
+
+    public SelenideElement loginFormatError = $("#uName-error");
 
     public SelenideElement userIcon = $("#user_icon");
 
@@ -23,7 +30,15 @@ public class LoginPage extends BasePage {
         loginField.setValue(email);
         passwordField.setValue(password);
         signInButton.click();
-        userIcon.shouldBe(Condition.visible);
-//        Driver.waitForUrlContains("secure");
+        userIcon.shouldBe(visible);
     }
+
+    public boolean isLoginErrorMessageDisplayed() {
+        return loginErrorMessage.waitUntil(visible, 5000).isDisplayed();
+    }
+
+    public boolean isLoginFormatErrorMessageDisplayed() {
+        return loginFormatError.waitUntil(visible, 5000).isDisplayed();
+    }
+
 }

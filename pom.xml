@@ -83,6 +83,13 @@
             <version>1.7.25</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide-listeners</artifactId>
+            <version>1.0.8</version> <!-- Replace with the latest version of selenide-listeners -->
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>

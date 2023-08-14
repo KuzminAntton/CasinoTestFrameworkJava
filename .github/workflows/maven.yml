@@ -1,0 +1,77 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+name: Java CI with Maven
+
+# Set up cases when to run Actions
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+#  workflow_dispatch:
+#    inputs:
+#      TEST_ENDPOINT:
+#        description: "Endpoint for tests"
+#        required: true
+#        default: https://dev.github.com
+#      TEST_BROWSER:
+#        description: "Browser for tests"
+#        required: true
+#        default: chrome
+#      ALLURE_JOB_RUN_ID:
+#        description: "ALLURE_JOB_RUN_ID service parameter. Leave blank."
+#        required: false
+#      ALLURE_USERNAME:
+#        description: "ALLURE_USERNAME service parameter. Leave blank"
+#        required: false
+
+#env:
+#  ALLURE_RESULTS: "target/allure-results"
+#  ALLURE_JOB_RUN_ID: ${{ github.event.inputs.ALLURE_JOB_RUN_ID }}
+
+jobs:
+  build:
+    # Set up environment
+    runs-on: ubuntu-latest
+    steps:
+      # Set up JDK
+      - uses: actions/checkout@v3
+      - name: Set up JDK 11
+        # Set up maven framework
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: maven
+#      # Create connection between Allure testOps and GitHub
+#      - uses: allure-framework/setup-allurectl@v1
+#        with:
+#          allure-endpoint: https://bitandpay.testops.cloud
+#          allure-token: ${{ secrets.ALLURE_TOKEN }}
+#          allure-project-id: 1
+      # Maven build
+      - name: Build project with Maven
+        run: ./mvnw test -Dbrowser=chrome -Dheadless=1 -Dremote=1
+        env:
+          ALLURE_RESULTS: target/allure-results
+#      # Save report to GitHub pages
+#      - uses: actions/checkout@v3
+#        if: always()
+#        continue-on-error: true
+#        with:
+#          ref: gh-pages
+#          path: gh-pages
+#      # Generate report of allure results
+#      - uses: simple-elf/allure-report-action@master
+#        if: always()
+#        with:
+#          gh_pages: gh-pages
+#          allure_results: target/allure-results
+#          allure_report: allure-report
+#          allure_history: allure-history
+#      # Publish report to GitHub
+#      - uses: peaceiris/actions-gh-pages@v2
+#        if: always()
+#        env:
+#          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          PUBLISH_BRANCH: gh-pages
+#          PUBLISH_DIR: allure-history

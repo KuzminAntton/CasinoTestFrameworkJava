@@ -27,73 +27,65 @@ public class Driver {
 
     private static String driverPath = "driver/";
 
-//    public static void initBrowserStack() throws MalformedURLException {
-//          String BROWSERSTACK_USERNAME = "antonkuzmin_75ekFm";
-//          String BROWSERSTACK_ACCESS_KEY = "T9oPvCjsGpirmprvbMZh";
-////          String BROWSERSTACK_URL = "https://" + BROWSERSTACK_USERNAME + ":" + BROWSERSTACK_ACCESS_KEY + "@hub-cloud.browserstack.com/wd/hub";
-//
-//        Configuration.browser = "chrome"; // Specify the desired browser (e.g., "chrome", "firefox", etc.)
-//        Configuration.browserVersion = "latest"; // Specify the desired browser version
-//        Configuration.remote = "https://" + BROWSERSTACK_USERNAME + ":" + BROWSERSTACK_ACCESS_KEY + "@hub-cloud.browserstack.com/wd/hub";
-//
-////        WebDriver driver = new RemoteWebDriver(new URL(BROWSERSTACK_URL), caps);
-//    }
-
     public static void initDriver() throws MalformedURLException {
 
         // Get settings from command line
         TestConfig.initConfig();
 
-        // Set settings for selenide browser
-        String seleniumHubUrl = "http://localhost:4444/wd/hub";
-        URL hubUrl = new URL(seleniumHubUrl);
+        if (TestConfig.isRemote()) {
+            // Set settings for selenide browser
+            String seleniumHubUrl = "http://localhost:4444/wd/hub";
+            URL hubUrl = new URL(seleniumHubUrl);
 
-        ChromeOptions options = new ChromeOptions()
-                .addArguments("--remote-allow-origins=*")
-                .addArguments("--lang=en_US")
-                .addArguments("--headless")
-                .addArguments("disable-blink-features=AutomationControlled");
+            ChromeOptions options = new ChromeOptions()
+                    .addArguments("--remote-allow-origins=*")
+                    .addArguments("--lang=en_US")
+                    .addArguments("--headless")
+                    .addArguments("disable-blink-features=AutomationControlled");
 
-        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+            DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+            capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 
-        Configuration.remote = hubUrl.toString();
-        Configuration.browserCapabilities = capabilities;
+            Configuration.remote = hubUrl.toString();
+            Configuration.browserCapabilities = capabilities;
 
-//
-//        Configuration.pageLoadStrategy = "eager";
-//        Configuration.browserSize = "1920x1080";
-//        Configuration.holdBrowserOpen = false;
-//        Configuration.screenshots = false;
+            WebDriver driver = new RemoteWebDriver(hubUrl, capabilities);
+        } else {
 
-        WebDriver driver = new RemoteWebDriver(hubUrl, capabilities);
+            System.setProperty("webdriver.chrome.driver", driverPath + "chromedriver");
 
-//        System.setProperty("webdriver.chrome.driver", driverPath + "chromedriver");
+            ChromeOptions options = new ChromeOptions()
+                    .addArguments("--remote-allow-origins=*")
+                    .addArguments("--lang=en_US")
+                    .addArguments("disable-blink-features=AutomationControlled");
 
+            Configuration.pageLoadStrategy = "eager";
+            Configuration.browserSize = "1920x1080";
+            Configuration.holdBrowserOpen = false;
+            Configuration.screenshots = false;
 
+            if(TestConfig.isHeadless()) {
+                Configuration.headless = true;
+            } else {
+                Configuration.headless = false;
+            }
 
+            switch (TestConfig.browser)
+            {
+                case "chrome":
+                    Configuration.browser = Browsers.CHROME;
+                    WebDriver webDriver = new ChromeDriver(options);
+                    setWebDriver(webDriver);
+                    break;
+                case "firefox":
+                    Configuration.browser = Browsers.FIREFOX;
+                    break;
+                default:
+                    Configuration.browser = Browsers.CHROME;
+                    break;
+            }
+        }
 
-
-//        if(TestConfig.isHeadless()) {
-//            Configuration.headless = true;
-//        } else {
-//            Configuration.headless = false;
-//        }
-
-//        switch (TestConfig.browser)
-//        {
-//            case "chrome":
-//                Configuration.browser = Browsers.CHROME;
-//                WebDriver webDriver = new ChromeDriver(options);
-//                setWebDriver(webDriver);
-//                break;
-//            case "firefox":
-//                Configuration.browser = Browsers.FIREFOX;
-//                break;
-//            default:
-//                Configuration.browser = Browsers.CHROME;
-//                break;
-//        }
     }
 
     public static WebDriver currentDriver() {
