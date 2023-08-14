@@ -68,7 +68,7 @@ jobs:
       - run:
           name: Run tests
           command: |
-            ./mvnw test -Dbrowser=chrome -Dheadless=1 -Dremote=1
+            ./mvnw test -Dbrowser=chrome -Dheadless=1 -Dremote=0
       # Other steps as needed for your build process
 
 workflows:

@@ -32,4 +32,4 @@ jobs:
 
       - name: Run tests
         run: |
-          ./mvnw test -Dbrowser=chrome -Dheadless=1 -Dremote=1
+          ./mvnw test -Dbrowser=chrome -Dheadless=1 -Dremote=0
