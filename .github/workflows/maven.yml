@@ -15,9 +15,6 @@ jobs:
     container:
       image: circleci/openjdk:11  # Use the appropriate Java version here
 
-    services:
-      - name: selenium/standalone-chrome:3.11.0
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -47,10 +44,12 @@ jobs:
       - name: Start Selenium Hub
         run: |
           docker run -d -p 4444:4444 selenium/hub:3.141.59
+          sleep 5  # Give the Hub some time to start
 
       - name: Start Selenium Node (Chrome)
         run: |
           docker run -d -e HUB_HOST=host.docker.internal -e HUB_PORT=4444 selenium/node-chrome:3.141.59
+          sleep 5  # Give the Node some time to start
 
       - name: Run tests
         run: |
