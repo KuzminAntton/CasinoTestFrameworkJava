@@ -19,7 +19,7 @@ jobs:
           cache: maven
 
       - uses: browser-actions/setup-chrome@latest
-        run: chrome --version
+      - run: chrome --version
 
       - name: create Folders
         run: sudo mkdir -p /usr/local/selenium/bin /usr/local/selenium/drivers
