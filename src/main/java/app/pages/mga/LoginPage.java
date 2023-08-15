@@ -4,6 +4,8 @@ import app.pages.BasePage;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import helpers.Driver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
@@ -26,6 +28,8 @@ public class LoginPage extends BasePage {
     }
 
     public void login(String email, String password) {
+        System.out.println("start login");
+        new WebDriverWait(loginButton.getWrappedDriver(), 20).until(ExpectedConditions.visibilityOfAllElements(loginButton));
         loginButton.click();
         loginField.setValue(email);
         passwordField.setValue(password);

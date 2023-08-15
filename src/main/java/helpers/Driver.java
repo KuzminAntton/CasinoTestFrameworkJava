@@ -58,14 +58,17 @@ public class Driver {
                     .addArguments("--remote-allow-origins=*")
                     .addArguments("--lang=en_US")
                     .addArguments("--no-sandbox")
-                    .addArguments("--headless")
+                    .addArguments("--headless=new")
                     .addArguments("--disable-dev-shm-usage")
+                    .addArguments("start-maximized")
+                    .addArguments("--ignore-certificate-errors")
+                    .addArguments("--allow-running-insecure-content")
                     .addArguments("disable-blink-features=AutomationControlled");
 
-            Configuration.pageLoadStrategy = "eager";
-            Configuration.browserSize = "1920x1080";
-            Configuration.holdBrowserOpen = false;
-            Configuration.screenshots = false;
+//            Configuration.pageLoadStrategy = "eager";
+//            Configuration.browserSize = "1920x1080";
+//            Configuration.holdBrowserOpen = false;
+//            Configuration.screenshots = false;
 
 //            Configuration.headless = TestConfig.isHeadless();
 
