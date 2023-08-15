@@ -40,7 +40,12 @@ public class Driver {
             ChromeOptions options = new ChromeOptions()
                     .addArguments("--remote-allow-origins=*")
                     .addArguments("--lang=en_US")
-                    .addArguments("--headless")
+                    .addArguments("--no-sandbox")
+                    .addArguments("--headless=new")
+                    .addArguments("--disable-dev-shm-usage")
+                    .addArguments("start-maximized")
+                    .addArguments("--ignore-certificate-errors")
+                    .addArguments("--allow-running-insecure-content")
                     .addArguments("disable-blink-features=AutomationControlled");
 
             DesiredCapabilities capabilities = DesiredCapabilities.chrome();
@@ -50,6 +55,7 @@ public class Driver {
             Configuration.browserCapabilities = capabilities;
 
             WebDriver driver = new RemoteWebDriver(hubUrl, capabilities);
+            setWebDriver(driver);
         }
 //        else {
 

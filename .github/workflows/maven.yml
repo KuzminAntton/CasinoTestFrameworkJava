@@ -21,5 +21,8 @@ jobs:
       - uses: browser-actions/setup-chrome@latest
       - run: chrome --version
 
+      - name: Start chromedriver and Selenium server on port 4444
+        run: java -Dwebdriver.chrome.driver=driver/chromedriver -Dport=4444 -jar selenium_standalone_server/selenium-server-standalone-3.8.1.jar
+
       - name: Build with Maven
         run: ./mvnw test
