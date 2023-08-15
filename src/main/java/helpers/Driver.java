@@ -32,7 +32,7 @@ public class Driver {
         // Get settings from command line
         TestConfig.initConfig();
 
-        if (TestConfig.isRemote()) {
+//        if (TestConfig.isRemote()) {
             // Set settings for selenide browser
             String seleniumHubUrl = "http://localhost:4444/wd/hub";
             URL hubUrl = new URL(seleniumHubUrl);
@@ -50,45 +50,46 @@ public class Driver {
             Configuration.browserCapabilities = capabilities;
 
             WebDriver driver = new RemoteWebDriver(hubUrl, capabilities);
-        } else {
-
-            System.setProperty("webdriver.chrome.driver", driverPath + "chromedriver");
-
-            ChromeOptions options = new ChromeOptions()
-                    .addArguments("--remote-allow-origins=*")
-                    .addArguments("--lang=en_US")
-                    .addArguments("--no-sandbox")
-                    .addArguments("--headless=new")
-                    .addArguments("--disable-dev-shm-usage")
-                    .addArguments("start-maximized")
-                    .addArguments("--ignore-certificate-errors")
-                    .addArguments("--allow-running-insecure-content")
-                    .addArguments("disable-blink-features=AutomationControlled");
-
-//            Configuration.pageLoadStrategy = "eager";
-//            Configuration.browserSize = "1920x1080";
-//            Configuration.holdBrowserOpen = false;
-//            Configuration.screenshots = false;
-
-//            Configuration.headless = TestConfig.isHeadless();
-
-            switch (TestConfig.browser)
-            {
-                case "chrome":
-                    Configuration.browser = Browsers.CHROME;
-                    WebDriver webDriver = new ChromeDriver(options);
-                    setWebDriver(webDriver);
-                    break;
-                case "firefox":
-                    Configuration.browser = Browsers.FIREFOX;
-                    break;
-                default:
-                    Configuration.browser = Browsers.CHROME;
-                    break;
-            }
         }
+//        else {
 
-    }
+//            System.setProperty("webdriver.chrome.driver", driverPath + "chromedriver");
+//
+//            ChromeOptions options = new ChromeOptions()
+//                    .addArguments("--remote-allow-origins=*")
+//                    .addArguments("--lang=en_US")
+//                    .addArguments("--no-sandbox")
+//                    .addArguments("--headless=new")
+//                    .addArguments("--disable-dev-shm-usage")
+//                    .addArguments("start-maximized")
+//                    .addArguments("--ignore-certificate-errors")
+//                    .addArguments("--allow-running-insecure-content")
+//                    .addArguments("disable-blink-features=AutomationControlled");
+//
+////            Configuration.pageLoadStrategy = "eager";
+////            Configuration.browserSize = "1920x1080";
+////            Configuration.holdBrowserOpen = false;
+////            Configuration.screenshots = false;
+//
+////            Configuration.headless = TestConfig.isHeadless();
+//
+//            switch (TestConfig.browser)
+//            {
+//                case "chrome":
+//                    Configuration.browser = Browsers.CHROME;
+//                    WebDriver webDriver = new ChromeDriver(options);
+//                    setWebDriver(webDriver);
+//                    break;
+//                case "firefox":
+//                    Configuration.browser = Browsers.FIREFOX;
+//                    break;
+//                default:
+//                    Configuration.browser = Browsers.CHROME;
+//                    break;
+//            }
+//        }
+//
+//    }
 
     public static WebDriver currentDriver() {
         return WebDriverRunner.getSelenideDriver().getWebDriver();
