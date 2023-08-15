@@ -1,3 +1,5 @@
+name: Selenium Tests
+
 on:
   push:
     branches: [ "main" ]
@@ -11,36 +13,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Set up JDK 11
-        uses: actions/setup-java@v3
-        with:
-          java-version: '11'
-          distribution: 'temurin'
-          cache: maven
 
-#      - uses: browser-actions/setup-chrome@latest
-#      - run: chrome --version
-#
-#      - name: create Folders
-#      - run: sudo mkdir -p /usr/local/selenium/bin /usr/local/selenium/drivers
-#
-#      - name: Download latest selenium server .jar file
-#      - run : cd /usr/local/selenium/bin && wget http://selenium-release.storage.googleapis.com/3.8/selenium-server-standalone-3.8.1.jar
-#
-#      - name: Download latest chromedriver
-#      - run: cd /usr/local/selenium/drivers && wget https://chromedriver.storage.googleapis.com/2.35/chromedriver_mac64.zip && unzip -a chromedriver_mac64.zip
-#
-#      - name:
-#      - run:
+      # ... rest of the steps ...
 
-      - name: debugging step 1
-        run: pwd
-
-      - name: debugging step 2
-        run: ls
+      - name: Set execute permissions for chromedriver and selenium-server JAR
+        run: |
+          chmod +x driver/chromedriver
+          chmod +x selenium_standalone_server/selenium-server-standalone-3.8.1.jar
 
       - name: Start chromedriver and Selenium server on port 4444
-        run: java -Dwebdriver.chrome.driver=./driver/chromedriver -Dport=4444 -jar ./selenium_standalone_server/selenium-server-standalone-3.8.1.jar
+        run: java -Dwebdriver.chrome.driver=driver/chromedriver -Dport=4444 -jar selenium_standalone_server/selenium-server-standalone-3.8.1.jar
 
       - name: Build with Maven
         run: ./mvnw test
