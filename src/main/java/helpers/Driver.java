@@ -57,6 +57,9 @@ public class Driver {
             ChromeOptions options = new ChromeOptions()
                     .addArguments("--remote-allow-origins=*")
                     .addArguments("--lang=en_US")
+                    .addArguments("--no-sandbox")
+                    .addArguments("--headless")
+                    .addArguments("--disable-dev-shm-usage")
                     .addArguments("disable-blink-features=AutomationControlled");
 
             Configuration.pageLoadStrategy = "eager";
@@ -64,11 +67,7 @@ public class Driver {
             Configuration.holdBrowserOpen = false;
             Configuration.screenshots = false;
 
-            if(TestConfig.isHeadless()) {
-                Configuration.headless = true;
-            } else {
-                Configuration.headless = false;
-            }
+//            Configuration.headless = TestConfig.isHeadless();
 
             switch (TestConfig.browser)
             {
