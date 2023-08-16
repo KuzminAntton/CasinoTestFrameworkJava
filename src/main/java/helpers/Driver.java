@@ -28,7 +28,7 @@ public class Driver {
     private static String driverPath = "driver/";
 
     public static void initDriver() throws MalformedURLException {
-
+        System.setProperty("webdriver.chrome.driver", driverPath + "chromedriver");
         // Get settings from command line
         TestConfig.initConfig();
         System.out.println("init configs");
