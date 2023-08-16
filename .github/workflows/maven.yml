@@ -49,8 +49,7 @@ jobs:
       - name: Stop and remove the Selenium Server container
         run: docker rm -f selenium-server
 
-      - name: Archive test results on failure
-        if: env.TEST_FAILED == 'true'
+      - name: Archive test results
         uses: actions/upload-artifact@v2
         with:
           name: test-results
