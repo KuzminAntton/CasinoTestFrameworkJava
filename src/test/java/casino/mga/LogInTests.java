@@ -36,9 +36,9 @@ public class LogInTests extends A_BaseTest
         Assert.assertTrue(app.loginPage.isLoginFormatErrorMessageDisplayed(), "Seems error message not displayed");
     }
 
-//    @AfterMethod
-//    public void clearCookies() {
-//        Driver.clearCookies(AppConfig.casinoMGA_URL);
-//    }
+    @AfterMethod
+    public void clearCookies() {
+        Driver.clearCookies(AppConfig.casinoMGA_URL);
+    }
 
 }
