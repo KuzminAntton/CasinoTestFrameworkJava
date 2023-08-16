@@ -9,7 +9,7 @@
 
     <test name="Tests">
         <classes>
-            <class name="casino.mga.LogInTests" />
+            <class name="casino.SeleniumHealthCheck" />
         </classes>
     </test>
 
