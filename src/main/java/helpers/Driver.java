@@ -31,6 +31,7 @@ public class Driver {
 
         // Get settings from command line
         TestConfig.initConfig();
+        System.out.println("init configs");
 
 //        if (TestConfig.isRemote()) {
             // Set settings for selenide browser
@@ -50,12 +51,13 @@ public class Driver {
 
             DesiredCapabilities capabilities = DesiredCapabilities.chrome();
             capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-
-//            Configuration.remote = hubUrl.toString();
+        System.out.println("set capabilities");
+            Configuration.remote = hubUrl.toString();
             Configuration.browserCapabilities = capabilities;
 
             WebDriver driver = new RemoteWebDriver(hubUrl, capabilities);
             setWebDriver(driver);
+        System.out.println("driver started");
         }
 //        else {
 
