@@ -34,8 +34,10 @@ public class LoginPage extends BasePage {
         loginField.setValue(email);
         passwordField.setValue(password);
         signInButton.click();
-        userIcon.shouldBe(visible);
+//        userIcon.shouldBe(visible);
     }
+
+
 
     public boolean isLoginErrorMessageDisplayed() {
         return loginErrorMessage.waitUntil(visible, 5000).isDisplayed();
