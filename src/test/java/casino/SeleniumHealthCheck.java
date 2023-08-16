@@ -6,6 +6,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.Test;
 
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 public class SeleniumHealthCheck {
 
@@ -20,8 +21,9 @@ public class SeleniumHealthCheck {
             ChromeOptions options = new ChromeOptions();
             options.setCapability("browserName", "chrome");
 
-            // Create a RemoteWebDriver instance
-            WebDriver driver = new RemoteWebDriver(hubUrl, options);
+            // Set a longer timeout
+            RemoteWebDriver driver = new RemoteWebDriver(hubUrl, options);
+            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
             // Perform a simple action (e.g., get title)
             driver.get("https://www.google.com");
