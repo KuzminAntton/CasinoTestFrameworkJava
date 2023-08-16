@@ -6,11 +6,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      docker:
-        image: docker:dind
-        options: --privileged
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -54,3 +49,8 @@ jobs:
       - name: Stop and remove the Selenium Server container
         run: docker rm -f selenium-server
 
+      - name: Archive test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results
+          path: CasinoFramework/build/reports/tests
