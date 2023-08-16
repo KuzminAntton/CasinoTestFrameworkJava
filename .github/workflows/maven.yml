@@ -43,13 +43,14 @@ jobs:
       - name: Wait for Selenium server to start
         run: sleep 10
 
-      - name: Build with Maven
-        run: ./mvnw test
+      - name: Build with Maven and check exit code
+        run: ./mvnw test || export TEST_FAILED=true
 
       - name: Stop and remove the Selenium Server container
         run: docker rm -f selenium-server
 
-      - name: Archive test results
+      - name: Archive test results on failure
+        if: env.TEST_FAILED == 'true'
         uses: actions/upload-artifact@v2
         with:
           name: test-results
