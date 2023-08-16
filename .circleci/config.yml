@@ -18,8 +18,9 @@ jobs:
 
       - run:
           name: Start chromedriver and Selenium server on port 4444
+          background: true  # Start in the background
           command: |
-            java -Dwebdriver.chrome.driver=driver/chromedriver -Dport=4444 -jar selenium_standalone_server/selenium-server-standalone-3.8.1.jar
+            java -Dwebdriver.chrome.driver=driver/chromedriver -jar selenium_standalone_server/selenium-server-standalone-3.8.1.jar -port 4444
 
       - run:
           name: Wait for Selenium server to start
