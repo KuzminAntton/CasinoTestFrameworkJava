@@ -51,7 +51,7 @@ public class Driver {
             DesiredCapabilities capabilities = DesiredCapabilities.chrome();
             capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 
-            Configuration.remote = hubUrl.toString();
+//            Configuration.remote = hubUrl.toString();
             Configuration.browserCapabilities = capabilities;
 
             WebDriver driver = new RemoteWebDriver(hubUrl, capabilities);
