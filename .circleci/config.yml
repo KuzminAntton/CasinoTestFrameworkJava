@@ -10,17 +10,31 @@ jobs:
     steps:
       - checkout
 
-      # ... rest of the steps ...
+      - setup_remote_docker:
+          version: 20.10.7
 
       - run:
-          name: Set execute permissions for chromedriver
-          command: chmod +x driver/chromedriver
+          name: Install Google Chrome and Chromedriver
+          command: |
+            wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+            echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
+            sudo apt-get update
+            sudo apt-get install -y google-chrome-stable
+
+            CHROMEDRIVER_VERSION=93.0.4577.63
+            wget -q "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
+            unzip chromedriver_linux64.zip
+            chmod +x chromedriver
+            mv chromedriver driver/
 
       - run:
           name: Start Selenium Server in Docker container
-          background: true
           command: |
             docker run -d --name selenium-server -p 4444:4444 selenium/standalone-chrome:3.8.1
+
+      - run:
+          name: Wait for Selenium server to start
+          command: sleep 10
 
       - run:
           name: Build with Maven
