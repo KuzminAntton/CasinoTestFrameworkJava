@@ -22,6 +22,10 @@ jobs:
             java -Dwebdriver.chrome.driver=driver/chromedriver -Dport=4444 -jar selenium_standalone_server/selenium-server-standalone-3.8.1.jar &
 
       - run:
+          name: Wait for Selenium server to start
+          command: sleep 10  # Adjust the timeout duration as needed
+
+      - run:
           name: Build with Maven
           command: ./mvnw test
 
