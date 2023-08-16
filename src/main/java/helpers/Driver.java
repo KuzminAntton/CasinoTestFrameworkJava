@@ -28,36 +28,27 @@ public class Driver {
     private static String driverPath = "driver/";
 
     public static void initDriver() throws MalformedURLException {
-        System.setProperty("webdriver.chrome.driver", driverPath + "chromedriver");
-        // Get settings from command line
-        TestConfig.initConfig();
-        System.out.println("init configs");
+        String seleniumHubUrl = "http://localhost:4444/wd/hub";
+        URL hubUrl = new URL(seleniumHubUrl);
 
-//        if (TestConfig.isRemote()) {
-            // Set settings for selenide browser
-            String seleniumHubUrl = "http://localhost:4444/wd/hub";
-            URL hubUrl = new URL(seleniumHubUrl);
+        ChromeOptions options = new ChromeOptions()
+                .addArguments("--remote-allow-origins=*")
+                .addArguments("--lang=en_US")
+                .addArguments("--no-sandbox")
+                .addArguments("--headless=new")
+                .addArguments("--disable-dev-shm-usage")
+                .addArguments("start-maximized")
+                .addArguments("--ignore-certificate-errors")
+                .addArguments("--allow-running-insecure-content")
+                .addArguments("disable-blink-features=AutomationControlled");
 
-            ChromeOptions options = new ChromeOptions()
-                    .addArguments("--remote-allow-origins=*")
-                    .addArguments("--lang=en_US")
-                    .addArguments("--no-sandbox")
-                    .addArguments("--headless=new")
-                    .addArguments("--disable-dev-shm-usage")
-                    .addArguments("start-maximized")
-                    .addArguments("--ignore-certificate-errors")
-                    .addArguments("--allow-running-insecure-content")
-                    .addArguments("disable-blink-features=AutomationControlled");
+        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 
-            DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-            capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-        System.out.println("set capabilities");
-            Configuration.remote = hubUrl.toString();
-            Configuration.browserCapabilities = capabilities;
-
-            WebDriver driver = new RemoteWebDriver(hubUrl, capabilities);
-            setWebDriver(driver);
-        System.out.println("driver started");
+        // Configure Selenide to use the remote WebDriver
+        Configuration.remote = hubUrl.toString();
+        Configuration.browser = "chrome"; // Set the browser name
+        Configuration.browserCapabilities = capabilities;
         }
 //        else {
 
