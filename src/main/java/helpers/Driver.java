@@ -30,6 +30,7 @@ public class Driver {
     public static void initDriver() throws MalformedURLException {
         String seleniumHubUrl = "http://localhost:4444/wd/hub";
         URL hubUrl = new URL(seleniumHubUrl);
+        System.setProperty("webdriver.chrome.driver", driverPath + "chromedriver");
 
         ChromeOptions options = new ChromeOptions()
 //        options.addArguments("--headless");
