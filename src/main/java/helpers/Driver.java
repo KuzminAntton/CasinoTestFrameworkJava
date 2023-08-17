@@ -19,7 +19,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
 
@@ -30,7 +32,7 @@ public class Driver {
     public static void initDriver() throws MalformedURLException {
         String seleniumHubUrl = "http://localhost:4444/wd/hub";
         URL hubUrl = new URL(seleniumHubUrl);
-        System.setProperty("webdriver.chrome.driver", driverPath + "chromedriver");
+//        System.setProperty("webdriver.chrome.driver", driverPath + "chromedriver");
 
         ChromeOptions options = new ChromeOptions()
 //        options.addArguments("--headless");
@@ -42,6 +44,7 @@ public class Driver {
                 .addArguments("--remote-allow-origins=*")
                 .addArguments("--lang=en_US")
                 .addArguments("--no-sandbox")
+//                .addArguments("--version")
                 .addArguments("--headless=new")
                 .addArguments("--disable-dev-shm-usage")
                 .addArguments("--ignore-certificate-errors")
@@ -50,14 +53,13 @@ public class Driver {
 
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-//        capabilities.setCapability("disable-blink-features", "AutomationControlled");
         capabilities.setCapability("w3c", true);
         capabilities.setCapability("acceptInsecureCerts", true);
 
         // Configure Selenide to use the remote WebDriver
         Configuration.remote = hubUrl.toString();
 //        Configuration.headless = true;
-//        Configuration.driverManagerEnabled= true;
+        Configuration.driverManagerEnabled= true;
         Configuration.browser = "chrome"; // Set the browser name
         Configuration.browserCapabilities = capabilities;
         }
