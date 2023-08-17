@@ -35,15 +35,6 @@ jobs:
           chmod +x chromedriver
           mv chromedriver driver/
 
-      - name: Install Xvfb
-        run: |
-          sudo apt-get install -y xvfb
-
-      - name: Start Xvfb
-        run: |
-          Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
-          export DISPLAY=:99
-
       - name: Start Selenium Server in Docker container
         run: |
           docker run -d --name selenium-server -p 4444:4444 selenium/standalone-chrome:3.8.1
@@ -52,7 +43,7 @@ jobs:
         run: sleep 10
 
       - name: Build with Maven and check exit code
-        run: ./mvnw test || export TEST_FAILED=true
+        run: ./mvnw test --file pom.xml
 
       - name: Stop and remove the Selenium Server container
         run: docker rm -f selenium-server
