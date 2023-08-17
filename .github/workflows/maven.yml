@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    runs-on: macos-latest  # Use macOS runner
+    runs-on: ubuntu-latest  # Use Ubuntu runner
 
     steps:
       - name: Checkout repository
@@ -16,27 +16,15 @@ jobs:
           distribution: 'adopt'
           java-version: 11
 
-      - name: Install Homebreww
-        run: |
-          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" -f
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
 
-      - name: Install Docker and Docker Machine
+      - name: Install Docker
         run: |
-          brew install --cask docker virtualbox
-          brew install docker-machine
-
-      - name: Create Docker Machine
-        run: |
-          docker-machine create --driver virtualbox default
-          docker-machine restart
-          eval "$(docker-machine env default)"
-          docker-machine regenerate-certs default
-          docker-machine restart
-
-      - name: Start Docker
-        run: |
-          eval "$(docker-machine env default)"
-          docker run hello-world
+          sudo apt-get update
+          sudo apt-get install -y docker.io
 
       - name: Start Selenium Server in Docker container
         run: |
