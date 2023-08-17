@@ -16,40 +16,22 @@ jobs:
           distribution: 'adopt'
           java-version: 11
 
-      - name: Install Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14
-
-      - name: Install required packages
+      - name: Install Latest Google Chrome
         run: |
           sudo apt-get update
           sudo apt-get install -y wget gnupg
-
-      - name: Download Google Chrome signing key
-        run: |
           wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-
-      - name: Add Google Chrome repository
-        run: |
           echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
-
-      - name: Update package list
-        run: |
           sudo apt-get update
-
-      - name: Install Google Chrome
-        run: |
           sudo apt-get install -y google-chrome-stable
 
-      - name: Install Chromedriver
+      - name: Install Latest ChromeDriver
         run: |
-          chmod +x driver/chromedriver
-#          CHROMEDRIVER_VERSION=106.0.5249.61
-#          # Download the latest available Chromedriver version
-#          wget -q "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
-#          unzip chromedriver_linux64.zip
-
+          LATEST_CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)
+          wget -q "https://chromedriver.storage.googleapis.com/$LATEST_CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
+          unzip chromedriver_linux64.zip
+          chmod +x chromedriver
+          sudo mv chromedriver /usr/local/bin/
 
       - name: Start Selenium Server in Docker container
         run: |
