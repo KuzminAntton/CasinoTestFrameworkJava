@@ -44,8 +44,7 @@ jobs:
 
       - name: Install Chromedriver
         run: |
-          chmod +x chromedriver
-          mv chromedriver driver/
+          chmod +x driver/chromedriver
 #          CHROMEDRIVER_VERSION=106.0.5249.61
 #          # Download the latest available Chromedriver version
 #          wget -q "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
