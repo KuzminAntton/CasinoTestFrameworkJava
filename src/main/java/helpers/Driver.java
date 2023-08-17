@@ -32,23 +32,31 @@ public class Driver {
         URL hubUrl = new URL(seleniumHubUrl);
 
         ChromeOptions options = new ChromeOptions()
+//        options.addArguments("--headless");
+//        options.addArguments("--disable-gpu");
+//        options.addArguments("--window-size=1920x1080");
+//        options.addArguments("disable-blink-features=AutomationControlled");
+
+
                 .addArguments("--remote-allow-origins=*")
                 .addArguments("--lang=en_US")
                 .addArguments("--no-sandbox")
                 .addArguments("--headless=new")
                 .addArguments("--disable-dev-shm-usage")
-                .addArguments("start-maximized")
                 .addArguments("--ignore-certificate-errors")
                 .addArguments("--allow-running-insecure-content")
                 .addArguments("disable-blink-features=AutomationControlled");
 
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+//        capabilities.setCapability("disable-blink-features", "AutomationControlled");
         capabilities.setCapability("w3c", true);
         capabilities.setCapability("acceptInsecureCerts", true);
 
         // Configure Selenide to use the remote WebDriver
         Configuration.remote = hubUrl.toString();
+//        Configuration.headless = true;
+//        Configuration.driverManagerEnabled= true;
         Configuration.browser = "chrome"; // Set the browser name
         Configuration.browserCapabilities = capabilities;
         }
