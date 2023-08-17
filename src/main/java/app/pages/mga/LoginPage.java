@@ -12,14 +12,14 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class LoginPage extends BasePage {
 
-    public SelenideElement loginButton = $x("(//*[@data-tracker-name='/login'])[1]");
-    public SelenideElement loginField = $("#uName");
-    public SelenideElement passwordField = $("#uPass");
-    public SelenideElement signInButton = $x("(//button[@type='submit'])[2]");
+    public SelenideElement loginButton = $x("(//*[@data-tracker-name='/login'])[1]").shouldBe(visible);
+    public SelenideElement loginField = $("#uName").shouldBe(visible);
+    public SelenideElement passwordField = $("#uPass").shouldBe(visible);
+    public SelenideElement signInButton = $x("(//button[@type='submit'])[2]").shouldBe(visible);
 
-    public SelenideElement loginErrorMessage = $("#login_error");
+    public SelenideElement loginErrorMessage = $("#login_error").shouldBe(visible);
 
-    public SelenideElement loginFormatError = $("#uName-error");
+    public SelenideElement loginFormatError = $("#uName-error").shouldBe(visible);
 
     public SelenideElement userIcon = $("#user_icon");
 

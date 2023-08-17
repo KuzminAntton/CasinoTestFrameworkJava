@@ -12,7 +12,6 @@ public class LogInTests extends A_BaseTest
     @Test
     public void loginViaEmail() throws InterruptedException {
         app.loginPage.open(AppConfig.casinoMGA_URL);
-        wait(5000);
         app.loginPage.login(AppConfig.MGA_login, AppConfig.MGA_password);
     }
 
