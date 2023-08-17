@@ -44,6 +44,7 @@ public class Driver {
 
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+        capabilities.setCapability("w3c", true);
 
         // Configure Selenide to use the remote WebDriver
         Configuration.remote = hubUrl.toString();
