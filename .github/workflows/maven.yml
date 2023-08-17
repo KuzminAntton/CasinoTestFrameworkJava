@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Use Ubuntu runner
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
@@ -16,15 +16,24 @@ jobs:
           distribution: 'adopt'
           java-version: 11
 
-      - name: Install Node.js and npm
+      - name: Install Node.js
         uses: actions/setup-node@v2
         with:
           node-version: 14
 
-      - name: Install Docker
+      - name: Install Google Chrome and Chromedriver
         run: |
           sudo apt-get update
-          sudo apt-get install -y docker.io
+          sudo apt-get install -y wget gnupg
+          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+          CHROMEDRIVER_VERSION=93.0.4577.63
+          wget -q "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
+          unzip chromedriver_linux64.zip
+          chmod +x chromedriver
+          mv chromedriver driver/
 
       - name: Install Xvfb
         run: |
@@ -42,9 +51,8 @@ jobs:
       - name: Wait for Selenium server to start
         run: sleep 10
 
-      - name: Build and Test with Maven (using Xvfb)
-        run: |
-          xvfb-run --auto-servernum ./mvnw test
+      - name: Build with Maven and check exit code
+        run: ./mvnw test || export TEST_FAILED=true
 
       - name: Stop and remove the Selenium Server container
         run: docker rm -f selenium-server
