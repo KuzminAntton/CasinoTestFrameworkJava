@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    runs-on: macos-latest  # Change to use macOS
+    runs-on: macos-latest  # Use macOS runner
 
     steps:
       - name: Checkout repository
@@ -21,14 +21,9 @@ jobs:
         with:
           node-version: 14
 
-      - name: Install Google Chrome and Chromedriver
+      - name: Install Docker
         run: |
-          brew install --cask google-chrome
-          CHROMEDRIVER_VERSION=93.0.4577.63
-          curl -O "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_mac64.zip"
-          unzip chromedriver_mac64.zip
-          chmod +x chromedriver
-          mv chromedriver driver/
+          brew install docker
 
       - name: Start Selenium Server in Docker container
         run: |
