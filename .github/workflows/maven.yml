@@ -16,21 +16,27 @@ jobs:
           distribution: 'adopt'
           java-version: 11
 
-      - name: Install Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14
-
-      - name: Install Docker
+      - name: Install Homebrew
         run: |
-          brew install docker
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+      - name: Install Docker and Docker Machine
+        run: |
+          brew install --cask docker virtualbox
+          brew install docker-machine
+
+      - name: Create Docker Machine
+        run: |
+          docker-machine create --driver virtualbox default
+          docker-machine restart
+          eval "$(docker-machine env default)"
+          docker-machine regenerate-certs default
+          docker-machine restart
 
       - name: Start Docker
         run: |
-          open --background -a Docker
-
-      - name: Wait for Docker to start
-        run: docker ps
+          eval "$(docker-machine env default)"
+          docker run hello-world
 
       - name: Start Selenium Server in Docker container
         run: |
