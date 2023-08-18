@@ -25,26 +25,15 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
-#      - name: Install Latest ChromeDriver
-#        run: |
-#          LATEST_CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)
-#          wget -q "https://chromedriver.storage.googleapis.com/$LATEST_CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
-#          unzip chromedriver_linux64.zip
-#          chmod +x chromedriver
-#          sudo mv chromedriver /usr/local/bin/
-
-      - name: Start Selenium Server in Docker container
+      - name: Start Selenium Server with ChromeDriver and Port
         run: |
-          docker run -d --name selenium-server -p 4444:4444 selenium/standalone-chrome:3.8.1
+          java -Dwebdriver.chrome.driver=ubuntu_driver/chromedriver -Dport=4444 -jar selenium_standalone_server/selenium-server-standalone-3.8.1.jar &
 
       - name: Wait for Selenium server to start
         run: sleep 10
 
       - name: Build with Maven and check exit code
         run: ./mvnw test --file pom.xml
-
-      - name: Stop and remove the Selenium Server container
-        run: docker rm -f selenium-server
 
       - name: Archive test results
         uses: actions/upload-artifact@v2
