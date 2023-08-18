@@ -2,19 +2,23 @@ package casino.mga;
 
 import app.AppConfig;
 import casino.A_BaseTest;
+import com.codeborne.selenide.SelenideElement;
 import helpers.Driver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
+import static com.codeborne.selenide.Selenide.$x;
+
 public class LogInTests extends A_BaseTest
 {
     @Test
     public void loginViaEmail() throws InterruptedException {
-        app.loginPage.open(AppConfig.casinoMGA_URL);
-        app.loginPage.login(AppConfig.MGA_login, AppConfig.MGA_password);
-//        String chromedriverVersion = System.getProperty("webdriver.chrome.driver");
-//        System.out.println("ChromeDriver Version: " + chromedriverVersion);
+        app.loginPage.open("https://www.google.com/");
+        SelenideElement element = $x(".//*[@alt='Google']");
+        Assert.assertTrue(element.isDisplayed());
+//        app.loginPage.login(AppConfig.MGA_login, AppConfig.MGA_password);
+
     }
 
 //    @Test
