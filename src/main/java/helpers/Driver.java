@@ -44,7 +44,6 @@ public class Driver {
                 .addArguments("--remote-allow-origins=*")
                 .addArguments("--lang=en_US")
                 .addArguments("--no-sandbox")
-//                .addArguments("--version")
                 .addArguments("--headless=new")
                 .addArguments("--disable-dev-shm-usage")
                 .addArguments("--ignore-certificate-errors")
@@ -53,6 +52,8 @@ public class Driver {
 
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+        capabilities.setCapability("useAutomationExtension", false);
+
         capabilities.setCapability("w3c", true);
         capabilities.setCapability("acceptInsecureCerts", true);
 
