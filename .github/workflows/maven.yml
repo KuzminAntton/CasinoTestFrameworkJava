@@ -32,7 +32,7 @@ jobs:
 
       - name: Start Selenium Server with ChromeDriver and Port
         run: |
-          java -Dwebdriver.chrome.driver=windows_driver/chromedriver.exe -Dwebdriver.chrome.args="--remote-allow-origins=* --lang=en_US --no-sandbox --headless=new --disable-dev-shm-usage --ignore-certificate-errors --allow-running-insecure-content disable-blink-features=AutomationControlled" -jar selenium_standalone_server/selenium-server-4.11.0.jar standalone  &
+          java -Dwebdriver.chrome.driver=driver/windows_driver/chrome.exe -Dwebdriver.chrome.args="--remote-allow-origins=* --lang=en_US --no-sandbox --headless=new --disable-dev-shm-usage --ignore-certificate-errors --allow-running-insecure-content disable-blink-features=AutomationControlled" -jar selenium_standalone_server/selenium-server-4.11.0.jar standalone  &
 
       - name: Wait for Selenium server to start
         run: Start-Sleep -s 10
