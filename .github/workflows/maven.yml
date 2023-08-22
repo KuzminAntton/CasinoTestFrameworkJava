@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout repository
@@ -18,19 +18,17 @@ jobs:
 
       - name: Install Latest Google Chrome
         run: |
-          sudo apt-get update
-          sudo apt-get install -y wget gnupg
-          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-          echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
+          choco install wget
+          wget -O chrome_installer.exe https://dl.google.com/chrome/install/375.126/chrome_installer.exe
+          ./chrome_installer.exe --system-level --force-installer --force-pin=4
+          rm ./chrome_installer.exe
 
       - name: Start Selenium Server with ChromeDriver and Port
         run: |
-          java -Dwebdriver.chrome.driver=ubuntu_driver/chromedriver -Dwebdriver.chrome.args="--remote-allow-origins=* --lang=en_US --no-sandbox --headless=new --disable-dev-shm-usage --ignore-certificate-errors --allow-running-insecure-content disable-blink-features=AutomationControlled" -jar selenium_standalone_server/selenium-server-4.11.0.jar standalone  &
+          java -Dwebdriver.chrome.driver=windows_driver/chromedriver.exe -Dwebdriver.chrome.args="--remote-allow-origins=* --lang=en_US --no-sandbox --headless=new --disable-dev-shm-usage --ignore-certificate-errors --allow-running-insecure-content disable-blink-features=AutomationControlled" -jar selenium_standalone_server/selenium-server-4.11.0.jar standalone  &
 
       - name: Wait for Selenium server to start
-        run: sleep 10
+        run: Start-Sleep -s 10
 
       - name: Build with Maven and check exit code
         run: ./mvnw test --file pom.xml
