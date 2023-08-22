@@ -16,12 +16,12 @@ jobs:
           distribution: 'adopt'
           java-version: 11
 
-      - name: Install Latest Google Chrome
+      - name: Install Chocolatey
         run: |
-          choco install wget
-          wget -O chrome_installer.exe https://dl.google.com/chrome/install/375.126/chrome_installer.exe
-          ./chrome_installer.exe --system-level --force-installer --force-pin=4
-          rm ./chrome_installer.exe
+          Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+
+      - name: Install Latest Google Chrome using Chocolatey
+        run: choco install googlechrome --yes
 
       - name: Start Selenium Server with ChromeDriver and Port
         run: |
