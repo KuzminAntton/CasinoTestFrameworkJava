@@ -24,6 +24,11 @@ jobs:
         run: |
           Start-Process powershell -ArgumentList "Start-Process cmd -ArgumentList '/c choco install googlechrome --yes' -Verb RunAs"
 
+      - name: Display Chrome Version
+        run: |
+          $chromeVersion = (Get-ItemProperty 'HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome').DisplayVersion
+          Write-Host "Installed Chrome Version: $chromeVersion"
+
       - name: Start Selenium Server with ChromeDriver and Port
         run: |
           java -Dwebdriver.chrome.driver=windows_driver/chromedriver.exe -Dwebdriver.chrome.args="--remote-allow-origins=* --lang=en_US --no-sandbox --headless=new --disable-dev-shm-usage --ignore-certificate-errors --allow-running-insecure-content disable-blink-features=AutomationControlled" -jar selenium_standalone_server/selenium-server-4.11.0.jar standalone  &
