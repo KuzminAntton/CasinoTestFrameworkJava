@@ -14,11 +14,11 @@ public class LogInTests extends A_BaseTest
 {
     @Test
     public void loginViaEmail() throws InterruptedException {
-        app.loginPage.open("https://www.google.com/");
-        SelenideElement element = $x(".//*[@alt='Google']");
-        Assert.assertTrue(element.isDisplayed());
-//        app.loginPage.open(AppConfig.casinoMGA_URL);
-//        app.loginPage.login(AppConfig.MGA_login, AppConfig.MGA_password);
+//        app.loginPage.open("https://www.google.com/");
+//        SelenideElement element = $x(".//*[@alt='Google']");
+//        Assert.assertTrue(element.isDisplayed());
+        app.loginPage.open(AppConfig.casinoMGA_URL);
+        app.loginPage.login(AppConfig.MGA_login, AppConfig.MGA_password);
 
     }
 
