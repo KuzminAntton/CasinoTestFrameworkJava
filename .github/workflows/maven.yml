@@ -26,7 +26,8 @@ jobs:
 
       - name: Display Chrome Version
         run: |
-          $chromeVersion = (Get-ItemProperty 'HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome').DisplayVersion
+          $chromeExecutable = "${env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe"
+          $chromeVersion = (Get-Command $chromeExecutable).FileVersionInfo.ProductVersion
           Write-Host "Installed Chrome Version: $chromeVersion"
 
       - name: Start Selenium Server with ChromeDriver and Port
