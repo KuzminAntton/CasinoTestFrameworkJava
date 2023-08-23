@@ -32,8 +32,8 @@ public class Driver {
     public static void initDriver() throws MalformedURLException {
 //        String seleniumHubUrl = "http://localhost:4444/wd/hub";
 //        URL hubUrl = new URL(seleniumHubUrl);
-        System.setProperty("webdriver.chrome.driver", "driver/ubuntu_driver/chromedriver");
-//        System.setProperty("webdriver.chrome.driver", "driver/macos_driver/chromedriver");
+//        System.setProperty("webdriver.chrome.driver", "driver/ubuntu_driver/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "driver/macos_driver/chromedriver");
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -47,8 +47,12 @@ public class Driver {
 
 //        options.addArguments("--user-agent=Mozilla/5.0 (X11; Ubuntu; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.96 Safari/537.36");
 
+        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
         WebDriver driver = new ChromeDriver(options);
         WebDriverRunner.setWebDriver(driver);
+
+        System.out.println(" driver OPTIONS : " + options);
 
 ////        options.addArguments("--headless");
 ////        options.addArguments("--disable-gpu");

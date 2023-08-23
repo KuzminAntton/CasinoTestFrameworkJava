@@ -3,12 +3,14 @@ package casino.mga;
 import app.AppConfig;
 import casino.A_BaseTest;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
 import helpers.Driver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.getWebDriverLogs;
 
 public class LogInTests extends A_BaseTest
 {
@@ -19,6 +21,7 @@ public class LogInTests extends A_BaseTest
 //        Assert.assertTrue(element.isDisplayed());
         app.loginPage.open(AppConfig.casinoMGA_URL);
         app.loginPage.login(AppConfig.MGA_login, AppConfig.MGA_password);
+
     }
 
 //    @Test
