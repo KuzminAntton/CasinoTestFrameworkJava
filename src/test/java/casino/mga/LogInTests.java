@@ -19,7 +19,6 @@ public class LogInTests extends A_BaseTest
 //        Assert.assertTrue(element.isDisplayed());
         app.loginPage.open(AppConfig.casinoMGA_URL);
         app.loginPage.login(AppConfig.MGA_login, AppConfig.MGA_password);
-
     }
 
 //    @Test

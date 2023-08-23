@@ -30,39 +30,49 @@ public class Driver {
     private static String driverPath = "driver/";
 
     public static void initDriver() throws MalformedURLException {
-        String seleniumHubUrl = "http://localhost:4444/wd/hub";
-        URL hubUrl = new URL(seleniumHubUrl);
-//        System.setProperty("webdriver.chrome.driver", driverPath + "chromedriver");
+//        String seleniumHubUrl = "http://localhost:4444/wd/hub";
+//        URL hubUrl = new URL(seleniumHubUrl);
+        System.setProperty("webdriver.chrome.driver", "driver/ubuntu_driver/chromedriver");
 
-        ChromeOptions options = new ChromeOptions()
-//        options.addArguments("--headless");
-//        options.addArguments("--disable-gpu");
-//        options.addArguments("--window-size=1920x1080");
-//        options.addArguments("disable-blink-features=AutomationControlled");
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--lang=en_US");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--headless=new");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--ignore-certificate-errors");
+        options.addArguments("--allow-running-insecure-content");
+        options.addArguments("--disable-blink-features=AutomationControlled");
 
+        WebDriver driver = new ChromeDriver(options);
+        WebDriverRunner.setWebDriver(driver);
 
-                .addArguments("--remote-allow-origins=*")
-                .addArguments("--lang=en_US")
-                .addArguments("--no-sandbox")
-                .addArguments("--headless=new")
-                .addArguments("--disable-dev-shm-usage")
-                .addArguments("--ignore-certificate-errors")
-                .addArguments("--allow-running-insecure-content")
-                .addArguments("disable-blink-features=AutomationControlled");
-
-        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-        capabilities.setCapability("useAutomationExtension", false);
-
-        capabilities.setCapability("w3c", true);
-        capabilities.setCapability("acceptInsecureCerts", true);
-
-        // Configure Selenide to use the remote WebDriver
-        Configuration.remote = hubUrl.toString();
-//        Configuration.headless = true;
-        Configuration.driverManagerEnabled= true;
-        Configuration.browser = "chrome"; // Set the browser name
-        Configuration.browserCapabilities = capabilities;
+////        options.addArguments("--headless");
+////        options.addArguments("--disable-gpu");
+////        options.addArguments("--window-size=1920x1080");
+////        options.addArguments("disable-blink-features=AutomationControlled");
+//
+//
+//                .addArguments("--remote-allow-origins=*")
+//                .addArguments("--lang=en_US")
+//                .addArguments("--no-sandbox")
+//                .addArguments("--headless=new")
+//                .addArguments("--disable-dev-shm-usage")
+//                .addArguments("--ignore-certificate-errors")
+//                .addArguments("--allow-running-insecure-content")
+//                .addArguments("disable-blink-features=AutomationControlled");
+//
+//        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+//        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+//        capabilities.setCapability("useAutomationExtension", false);
+//        capabilities.setCapability("acceptInsecureCerts", true);
+//
+//        // Configure Selenide to use the remote WebDriver
+//        Configuration.remote = hubUrl.toString();
+////        Configuration.headless = true;
+//        Configuration.driverManagerEnabled= true;
+//        Configuration.browser = "chrome"; // Set the browser name
+//        Configuration.browserCapabilities = capabilities;
         }
 //        else {
 
