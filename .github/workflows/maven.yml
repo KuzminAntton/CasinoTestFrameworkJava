@@ -24,11 +24,11 @@ jobs:
         run: |
           Start-Process powershell -ArgumentList "Start-Process cmd -ArgumentList '/c choco install googlechrome --yes' -Verb RunAs"
 
-      - name: Display Chrome Version
-        run: |
-          $chromeExecutable = "${env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe"
-          $chromeVersion = (Get-Command $chromeExecutable).FileVersionInfo.ProductVersion
-          Write-Host "Installed Chrome Version: $chromeVersion"
+#      - name: Display Chrome Version
+#        run: |
+#          $chromeExecutable = "${env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe"
+#          $chromeVersion = (Get-Command $chromeExecutable).FileVersionInfo.ProductVersion
+#          Write-Host "Installed Chrome Version: $chromeVersion"
 
       - name: Start Selenium Server with ChromeDriver and Port
         run: |
