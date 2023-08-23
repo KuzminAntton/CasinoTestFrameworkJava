@@ -39,13 +39,13 @@ public class Driver {
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--lang=en_US");
         options.addArguments("--no-sandbox");
-        options.addArguments("--goog:chromeOptions=--headless=new");
+        options.addArguments("--headless=new");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--ignore-certificate-errors");
         options.addArguments("--allow-running-insecure-content");
         options.addArguments("--disable-blink-features=AutomationControlled");
 
-        options.addArguments("--user-agent=Mozilla/5.0 (X11; Ubuntu; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.96 Safari/537.36");
+//        options.addArguments("--user-agent=Mozilla/5.0 (X11; Ubuntu; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.96 Safari/537.36");
 
         WebDriver driver = new ChromeDriver(options);
         WebDriverRunner.setWebDriver(driver);
