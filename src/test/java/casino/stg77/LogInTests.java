@@ -3,6 +3,8 @@ package casino.stg77;
 import app.App;
 import app.AppConfig;
 import casino.A_BaseTest;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverRunner;
 import helpers.Driver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -14,7 +16,15 @@ public class LogInTests extends A_BaseTest
     public void loginViaEmail() throws InterruptedException {
         app.loginPageSTG.open(AppConfig.casinoSTG_URL);
         System.out.println("this is URL ******************** : " + Driver.getCurrentURL());
+
+        // Print the page source for debugging
+        System.out.println("Page source: " + WebDriverRunner.getWebDriver().getPageSource());
+
         app.loginPageSTG.login(AppConfig.STG_login, AppConfig.STG_password);
+
+        // Take a screenshot for debugging in case of failure
+        Selenide.screenshot("failure_screenshot");
+
         Assert.assertEquals(Driver.getCurrentURL(), AppConfig.casinoSTG_URL + "profile/transactions");
     }
 
