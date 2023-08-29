@@ -31,9 +31,6 @@ jobs:
           sleep 10  # Wait for the Selenium server to start
           curl http://localhost:4444/wd/hub/status
 
-      - name: Wait for Selenium server to start
-        run: sleep 10
-
       - name: Build with Maven and check exit code
         run: ./mvnw test --file pom.xml
 
