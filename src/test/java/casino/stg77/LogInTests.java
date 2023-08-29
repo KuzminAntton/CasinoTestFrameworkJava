@@ -1,28 +1,20 @@
-package casino.mga;
+package casino.stg77;
 
+import app.App;
 import app.AppConfig;
 import casino.A_BaseTest;
-import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.WebDriverRunner;
 import helpers.Driver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
-import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.getWebDriverLogs;
-
 public class LogInTests extends A_BaseTest
 {
     @Test
     public void loginViaEmail() throws InterruptedException {
-//        app.loginPage.open("https://www.google.com/");
-//        SelenideElement element = $x(".//*[@alt='Google']");
-//        Assert.assertTrue(element.isDisplayed());
-        app.loginPage.open("https://www.77stg.io/");
-        System.out.println();
-        app.loginPage.login(AppConfig.MGA_login, AppConfig.MGA_password);
-
+        app.loginPageSTG.open(AppConfig.casinoSTG_URL);
+        app.loginPageSTG.login(AppConfig.STG_login, AppConfig.STG_password);
+        Assert.assertEquals(Driver.getCurrentURL(), AppConfig.casinoSTG_URL + "profile/transactions");
     }
 
 //    @Test

@@ -32,6 +32,10 @@ public class AppConfig {
     public static final String MGA_login = getProperty("MGA_login");
     public static final String MGA_password = getProperty("MGA_password");
 
+    public static final String casinoSTG_URL = getProperty("STG_URL");
+    public static final String STG_login = getProperty("STG_login");
+    public static final String STG_password = getProperty("STG_password");
+
     public static final String ADMIN_URL = getProperty("ADMIN_URL");
     public static final String ADMIN_login = getProperty("ADMIN_login");
     public static final String ADMIN_password = getProperty("ADMIN_password");

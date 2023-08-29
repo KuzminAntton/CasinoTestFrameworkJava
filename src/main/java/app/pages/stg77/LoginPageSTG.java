@@ -1,21 +1,23 @@
-package app.pages.mga;
+package app.pages.stg77;
 
 import app.pages.BasePage;
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import helpers.Driver;
+import com.codeborne.selenide.SelenideWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 
-public class LoginPage extends BasePage {
+public class LoginPageSTG extends BasePage {
 
-    public SelenideElement loginButton = $x("(//*[@data-tracker-name='/login'])[1]");
-    public SelenideElement loginField = $("#uName");
-    public SelenideElement passwordField = $("#uPass");
-    public SelenideElement signInButton = $x("(//button[@type='submit'])[2]");
+    public SelenideElement loginButton = $(".sign-in-box");
+    public SelenideElement loginField = $("#ember38");
+    public SelenideElement passwordField = $("#ember39");
+    public SelenideElement signInButton = $x(".//*[contains(@class, 'log-in-btn')]");
+
+    public SelenideElement profileButton = $("#ember40");
 
     public SelenideElement loginErrorMessage = $("#login_error");
 
@@ -23,19 +25,19 @@ public class LoginPage extends BasePage {
 
     public SelenideElement userIcon = $("#user_icon");
 
-    public LoginPage(String pageUrl) {
+    public LoginPageSTG(String pageUrl) {
         super(pageUrl);
     }
 
     public void login(String email, String password) {
-        System.out.println("start login");
-        new WebDriverWait(loginButton.getWrappedDriver(), 20).until(ExpectedConditions.visibilityOfAllElements(loginButton));
         loginButton.click();
-        loginField.setValue(email);
+        loginField.waitUntil(visible, 10000).setValue(email);
         passwordField.setValue(password);
         signInButton.click();
-//        userIcon.shouldBe(visible);
+        profileButton.click();
     }
+
+
 
     public boolean isLoginErrorMessageDisplayed() {
         return loginErrorMessage.waitUntil(visible, 5000).isDisplayed();

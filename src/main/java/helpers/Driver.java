@@ -39,11 +39,11 @@ public class Driver {
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--lang=en_US");
         options.addArguments("--no-sandbox");
-        options.addArguments("--headless=new");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--ignore-certificate-errors");
-        options.addArguments("--allow-running-insecure-content");
-        options.addArguments("--disable-blink-features=AutomationControlled");
+//        options.addArguments("--headless=new");
+//        options.addArguments("--disable-dev-shm-usage");
+//        options.addArguments("--ignore-certificate-errors");
+//        options.addArguments("--allow-running-insecure-content");
+//        options.addArguments("--disable-blink-features=AutomationControlled");
 
 //        options.addArguments("--user-agent=Mozilla/5.0 (X11; Ubuntu; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.96 Safari/537.36");
 
@@ -201,6 +201,10 @@ public class Driver {
         LogEntries log = currentDriver().manage().logs().get("browser");
         List<LogEntry> logList = log.getAll();
         return logList;
+    }
+
+    public static String getCurrentURL() {
+        return WebDriverRunner.getWebDriver().getCurrentUrl();
     }
 
     // COOKIES
