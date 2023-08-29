@@ -54,6 +54,7 @@ public class Driver {
         Configuration.driverManagerEnabled= true;
         Configuration.browser = "chrome"; // Set the browser name
         Configuration.browserCapabilities = capabilities;
+        Configuration.timeout = 20000;
         }
 //        else {
 
