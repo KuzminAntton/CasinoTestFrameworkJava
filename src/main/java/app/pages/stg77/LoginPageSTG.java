@@ -35,7 +35,7 @@ public class LoginPageSTG extends BasePage {
         loginButton.click();
         getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(By.id("ember38")));
         loginField.setValue(email);
-        getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(By.id("ember39")));
+//        getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(By.id("ember39")));
         passwordField.setValue(password);
         signInButton.click();
         profileButton.click();
