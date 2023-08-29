@@ -31,7 +31,7 @@ public class LoginPageSTG extends BasePage {
 
     public void login(String email, String password) {
         loginButton.click();
-        loginField.waitUntil(visible, 20000).setValue(email);
+        loginField.setValue(email);
         passwordField.setValue(password);
         signInButton.click();
         profileButton.click();
