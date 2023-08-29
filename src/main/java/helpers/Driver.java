@@ -32,8 +32,8 @@ public class Driver {
     public static void initDriver() throws MalformedURLException {
 //        String seleniumHubUrl = "http://localhost:4444/wd/hub";
 //        URL hubUrl = new URL(seleniumHubUrl);
-//        System.setProperty("webdriver.chrome.driver", "driver/ubuntu_driver/chromedriver");
-        System.setProperty("webdriver.chrome.driver", "driver/macos_driver/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "driver/ubuntu_driver/chromedriver");
+//        System.setProperty("webdriver.chrome.driver", "driver/macos_driver/chromedriver");
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
