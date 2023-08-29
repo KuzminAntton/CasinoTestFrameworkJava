@@ -1,8 +1,11 @@
 package app.pages.stg77;
 
 import app.pages.BasePage;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.SelenideWait;
+import com.codeborne.selenide.WebDriverRunner;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -31,6 +34,7 @@ public class LoginPageSTG extends BasePage {
 
     public void login(String email, String password) {
         loginButton.click();
+        getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(By.id("ember38")));
         loginField.setValue(email);
         passwordField.setValue(password);
         signInButton.click();

@@ -39,6 +39,7 @@ public class Driver {
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--lang=en_US");
         options.addArguments("--no-sandbox");
+        options.addArguments("--headless=new");
 
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
@@ -50,7 +51,7 @@ public class Driver {
 //
 //        // Configure Selenide to use the remote WebDriver
         Configuration.remote = hubUrl.toString();
-        Configuration.headless = true;
+//        Configuration.headless = true;
         Configuration.driverManagerEnabled= true;
         Configuration.browser = "chrome"; // Set the browser name
         Configuration.browserCapabilities = capabilities;
