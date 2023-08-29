@@ -30,9 +30,9 @@ public class Driver {
     private static String driverPath = "driver/";
 
     public static void initDriver() throws MalformedURLException {
-//        String seleniumHubUrl = "http://localhost:4444/wd/hub";
-//        URL hubUrl = new URL(seleniumHubUrl);
-        System.setProperty("webdriver.chrome.driver", "driver/ubuntu_driver/chromedriver");
+        String seleniumHubUrl = "http://localhost:4444/wd/hub";
+        URL hubUrl = new URL(seleniumHubUrl);
+//        System.setProperty("webdriver.chrome.driver", "driver/ubuntu_driver/chromedriver");
 //        System.setProperty("webdriver.chrome.driver", "driver/macos_driver/chromedriver");
 
         ChromeOptions options = new ChromeOptions();
@@ -54,32 +54,14 @@ public class Driver {
 
         System.out.println(" driver OPTIONS : " + options);
 
-////        options.addArguments("--headless");
-////        options.addArguments("--disable-gpu");
-////        options.addArguments("--window-size=1920x1080");
-////        options.addArguments("disable-blink-features=AutomationControlled");
-//
-//
-//                .addArguments("--remote-allow-origins=*")
-//                .addArguments("--lang=en_US")
-//                .addArguments("--no-sandbox")
-//                .addArguments("--headless=new")
-//                .addArguments("--disable-dev-shm-usage")
-//                .addArguments("--ignore-certificate-errors")
-//                .addArguments("--allow-running-insecure-content")
-//                .addArguments("disable-blink-features=AutomationControlled");
-//
-//        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-//        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-//        capabilities.setCapability("useAutomationExtension", false);
-//        capabilities.setCapability("acceptInsecureCerts", true);
+
 //
 //        // Configure Selenide to use the remote WebDriver
-//        Configuration.remote = hubUrl.toString();
+        Configuration.remote = hubUrl.toString();
 ////        Configuration.headless = true;
-//        Configuration.driverManagerEnabled= true;
-//        Configuration.browser = "chrome"; // Set the browser name
-//        Configuration.browserCapabilities = capabilities;
+        Configuration.driverManagerEnabled= true;
+        Configuration.browser = "chrome"; // Set the browser name
+        Configuration.browserCapabilities = capabilities;
         }
 //        else {
 
