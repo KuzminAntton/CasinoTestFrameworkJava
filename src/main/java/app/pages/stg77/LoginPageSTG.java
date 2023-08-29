@@ -33,7 +33,7 @@ public class LoginPageSTG extends BasePage {
 
     public void login(String email, String password) {
         loginButton.click();
-        getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(By.id("ember38")));
+//        getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(By.id("ember38")));
         loginField.setValue(email);
 //        getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(By.id("ember39")));
         passwordField.setValue(password);
