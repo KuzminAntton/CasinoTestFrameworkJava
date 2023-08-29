@@ -13,6 +13,7 @@ public class LogInTests extends A_BaseTest
     @Test
     public void loginViaEmail() throws InterruptedException {
         app.loginPageSTG.open(AppConfig.casinoSTG_URL);
+        System.out.println("this is URL ******************** : " + Driver.getCurrentURL());
         app.loginPageSTG.login(AppConfig.STG_login, AppConfig.STG_password);
         Assert.assertEquals(Driver.getCurrentURL(), AppConfig.casinoSTG_URL + "profile/transactions");
     }
