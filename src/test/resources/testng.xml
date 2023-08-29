@@ -9,7 +9,7 @@
 
     <test name="Tests">
         <classes>
-            <class name="casino.mga.LogInTests" />
+            <class name="casino.stg77.LogInTests" />
         </classes>
     </test>
 
