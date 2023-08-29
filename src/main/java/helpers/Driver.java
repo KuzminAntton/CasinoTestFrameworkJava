@@ -39,18 +39,10 @@ public class Driver {
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--lang=en_US");
         options.addArguments("--no-sandbox");
-//        options.addArguments("--headless=new");
-//        options.addArguments("--disable-dev-shm-usage");
-//        options.addArguments("--ignore-certificate-errors");
-//        options.addArguments("--allow-running-insecure-content");
-//        options.addArguments("--disable-blink-features=AutomationControlled");
-
-//        options.addArguments("--user-agent=Mozilla/5.0 (X11; Ubuntu; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.96 Safari/537.36");
 
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-        WebDriver driver = new ChromeDriver(options);
-        WebDriverRunner.setWebDriver(driver);
+
 
         System.out.println(" driver OPTIONS : " + options);
 
@@ -58,7 +50,7 @@ public class Driver {
 //
 //        // Configure Selenide to use the remote WebDriver
         Configuration.remote = hubUrl.toString();
-////        Configuration.headless = true;
+        Configuration.headless = true;
         Configuration.driverManagerEnabled= true;
         Configuration.browser = "chrome"; // Set the browser name
         Configuration.browserCapabilities = capabilities;
