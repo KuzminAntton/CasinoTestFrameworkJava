@@ -10,8 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.*;
 
 public class LoginPageSTG extends BasePage {
 
@@ -35,10 +34,15 @@ public class LoginPageSTG extends BasePage {
     public void login(String email, String password) {
         loginButton.click();
 //        getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(By.id("ember38")));
+        sleep(3000);
         loginField.setValue(email);
+        sleep(3000);
         passwordField.setValue(password);
+        sleep(3000);
         signInButton.click();
+        sleep(3000);
         profileButton.click();
+        sleep(3000);
     }
 
 
