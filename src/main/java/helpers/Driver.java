@@ -30,8 +30,16 @@ public class Driver {
     public static void initDriver() throws MalformedURLException {
 //        String seleniumHubUrl = AppConfig.SELENIUM_SERVER_URL;
 //        URL hubUrl = new URL(seleniumHubUrl);
-//        System.setProperty("webdriver.chrome.driver", "driver/ubuntu_driver/chromedriver");
-        System.setProperty("webdriver.chrome.driver", "driver/macos_driver/chromedriver");
+        TestConfig.initConfig();
+        System.out.println("the platform is :" + TestConfig.platform);
+        switch (TestConfig.platform) {
+            case "mac":
+                System.setProperty("webdriver.chrome.driver", "driver/macos_driver/chromedriver");
+                break;
+            case "ubuntu":
+                System.setProperty("webdriver.chrome.driver", "driver/ubuntu_driver/chromedriver");
+                break;
+        }
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");

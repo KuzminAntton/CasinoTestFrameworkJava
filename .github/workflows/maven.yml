@@ -32,7 +32,7 @@ jobs:
 #          curl http://localhost:4444/wd/hub/status
 
       - name: Build with Maven and check exit code
-        run: ./mvnw test --file pom.xml
+        run: ./mvnw -Dplatform="ubuntu" test --file pom.xml
 
       - name: Archive test results
         uses: actions/upload-artifact@v2
