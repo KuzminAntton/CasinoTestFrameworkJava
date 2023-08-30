@@ -19,7 +19,7 @@ public abstract class BasePage {
     public void open(String URL) throws InterruptedException {
         String url = Trim.rtrim(URL, "/") + "/" + Trim.ltrim(pageUrl, "/");
         Selenide.open(url);
-//        Thread.sleep(4000);
+        Thread.sleep(4000);
         Wait().until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
 //        boolean networkRequestsCompleted = new WebDriverWait(WebDriverRunner.getWebDriver(), maxWaitTime)
 //                .until(driver -> {
