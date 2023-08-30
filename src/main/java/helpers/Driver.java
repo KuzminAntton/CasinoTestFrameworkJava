@@ -28,10 +28,10 @@ import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
 public class Driver {
 
     public static void initDriver() throws MalformedURLException {
-        String seleniumHubUrl = AppConfig.SELENIUM_SERVER_URL;
-        URL hubUrl = new URL(seleniumHubUrl);
+//        String seleniumHubUrl = AppConfig.SELENIUM_SERVER_URL;
+//        URL hubUrl = new URL(seleniumHubUrl);
 //        System.setProperty("webdriver.chrome.driver", "driver/ubuntu_driver/chromedriver");
-//        System.setProperty("webdriver.chrome.driver", "driver/macos_driver/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "driver/macos_driver/chromedriver");
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -41,14 +41,14 @@ public class Driver {
 
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 
-        Configuration.remote = hubUrl.toString();
-        Configuration.headless = true;
+//        Configuration.remote = hubUrl.toString();
+//        Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
         Configuration.browserSize = "1920x1080";
         Configuration.driverManagerEnabled= true;
         Configuration.browser = "chrome"; // Set the browser name
         Configuration.browserCapabilities = capabilities;
-        Configuration.timeout = 20000;
+        Configuration.timeout = 6000;
         }
 
     public static WebDriver currentDriver() {

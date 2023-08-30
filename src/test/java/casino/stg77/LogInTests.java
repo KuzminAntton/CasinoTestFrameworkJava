@@ -16,6 +16,7 @@ public class LogInTests extends A_BaseTest
     public void loginViaEmail() throws InterruptedException {
         app.loginPageSTG.open(AppConfig.casinoSTG_URL);
         app.loginPageSTG.login(AppConfig.STG_login, AppConfig.STG_password);
+        app.loginPageSTG.clickProfileButton();
         Assert.assertEquals(Driver.getCurrentURL(), AppConfig.casinoSTG_URL + "profile/transactions");
     }
 
@@ -35,7 +36,7 @@ public class LogInTests extends A_BaseTest
 
     @AfterMethod
     public void clearCookies() {
-        Driver.clearCookies(AppConfig.casinoMGA_URL);
+        Driver.clearCookies(AppConfig.casinoSTG_URL);
     }
 
 }

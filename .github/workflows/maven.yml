@@ -25,11 +25,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
-      - name: Start Selenium Server with ChromeDriver and Port
-        run: |
-          java -Dwebdriver.chrome.driver=driver/ubuntu_driver/chromedriver -Dwebdriver.chrome.logfile=chromedriver.log -Dwebdriver.chrome.verboseLogging=true -Dport=4444 -jar selenium_standalone_server/selenium-server-4.11.0.jar standalone &
-          sleep 10  # Wait for the Selenium server to start and check it
-          curl http://localhost:4444/wd/hub/status
+#      - name: Start Selenium Server with ChromeDriver and Port
+#        run: |
+#          java -Dwebdriver.chrome.driver=driver/ubuntu_driver/chromedriver -Dwebdriver.chrome.logfile=chromedriver.log -Dwebdriver.chrome.verboseLogging=true -Dport=4444 -jar selenium_standalone_server/selenium-server-4.11.0.jar standalone &
+#          sleep 10  # Wait for the Selenium server to start and check it
+#          curl http://localhost:4444/wd/hub/status
 
       - name: Build with Maven and check exit code
         run: ./mvnw test --file pom.xml

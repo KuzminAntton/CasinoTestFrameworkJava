@@ -37,6 +37,9 @@ public class LoginPageSTG extends BasePage {
         loginField.setValue(email);
         passwordField.setValue(password);
         signInButton.click();
+    }
+
+    public void clickProfileButton() {
         profileButton.click();
     }
 
