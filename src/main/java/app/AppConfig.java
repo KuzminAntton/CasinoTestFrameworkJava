@@ -40,4 +40,7 @@ public class AppConfig {
     public static final String ADMIN_login = getProperty("ADMIN_login");
     public static final String ADMIN_password = getProperty("ADMIN_password");
 
+
+    public static final String SELENIUM_SERVER_URL = getProperty("SELENIUM_SERVER_URL");
+
 }

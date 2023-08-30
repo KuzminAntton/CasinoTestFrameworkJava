@@ -6,6 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.SelenideWait;
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -21,7 +22,7 @@ public class LoginPageSTG extends BasePage {
 
     public SelenideElement profileButton = $("#ember40");
 
-    public SelenideElement loginErrorMessage = $("#login_error");
+    public SelenideElement loginErrorMessage = $x(".//*[contains(@title, 'Dismiss this notification')]");
 
     public SelenideElement loginFormatError = $("#uName-error");
 
@@ -33,9 +34,7 @@ public class LoginPageSTG extends BasePage {
 
     public void login(String email, String password) throws InterruptedException {
         loginButton.click();
-//        getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(By.id("ember38")));
         loginField.setValue(email);
-//        getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(By.id("ember39")));
         passwordField.setValue(password);
         signInButton.click();
         profileButton.click();
