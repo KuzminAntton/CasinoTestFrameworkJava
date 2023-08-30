@@ -15,6 +15,7 @@ public class LogInTests extends A_BaseTest
     @Test
     public void loginViaEmail() throws InterruptedException {
         app.loginPageSTG.open(AppConfig.casinoSTG_URL);
+        Thread.sleep(5000);
         System.out.println("this is URL ******************** : " + Driver.getCurrentURL());
 
         // Print the page source for debugging

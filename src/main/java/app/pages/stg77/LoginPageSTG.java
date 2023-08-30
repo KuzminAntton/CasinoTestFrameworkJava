@@ -31,7 +31,7 @@ public class LoginPageSTG extends BasePage {
         super(pageUrl);
     }
 
-    public void login(String email, String password) {
+    public void login(String email, String password) throws InterruptedException {
         loginButton.click();
 //        getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(By.id("ember38")));
         loginField.setValue(email);

@@ -35,25 +35,27 @@ public class Driver {
 //        System.setProperty("webdriver.chrome.driver", "driver/ubuntu_driver/chromedriver");
 //        System.setProperty("webdriver.chrome.driver", "driver/macos_driver/chromedriver");
 
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        options.addArguments("--lang=en_US");
-        options.addArguments("--no-sandbox");
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--remote-allow-origins=*");
+//        options.addArguments("--lang=en_US");
+//        options.addArguments("--no-sandbox");
 //        options.addArguments("--headless=new");
 
-        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+//        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 
 
-        System.out.println(" driver OPTIONS : " + options);
+//        System.out.println(" driver OPTIONS : " + options);
 
 
 //
 //        // Configure Selenide to use the remote WebDriver
         Configuration.remote = hubUrl.toString();
-//        Configuration.headless = true;
+        Configuration.headless = true;
+        Configuration.pageLoadStrategy = "eager";
+        Configuration.browserSize = "1920x1080";
         Configuration.driverManagerEnabled= true;
-        Configuration.browser = "chrome"; // Set the browser name
+        Configuration.browser = "firefox"; // Set the browser name
         Configuration.browserCapabilities = capabilities;
         Configuration.timeout = 20000;
         }
