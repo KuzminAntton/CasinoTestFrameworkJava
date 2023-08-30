@@ -37,7 +37,7 @@ public class Driver {
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--lang=en_US");
         options.addArguments("--no-sandbox");
-//        options.addArguments("--headless=new");
+        options.addArguments("--headless=new");
 
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 
