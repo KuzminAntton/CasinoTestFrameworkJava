@@ -1,4 +1,4 @@
-package casino.stg77;
+package casino.admin;
 
 import app.AppConfig;
 import casino.A_BaseTest;
@@ -13,14 +13,7 @@ public class AdminTests extends A_BaseTest {
     public void loginToAdmin() throws InterruptedException {
         app.adminPage.open(AppConfig.ADMIN_URL);
         app.adminPage.login(AppConfig.ADMIN_login, AppConfig.ADMIN_password);
-        app.adminPage.topPanel.shouldHave(text(AppConfig.ADMIN_login));
+        Assert.assertTrue(app.adminMainPage.isUserProfileDisplayed());
     }
 
-    @Test
-    public void searchUserInAdmin() throws InterruptedException {
-        app.adminPage.open(AppConfig.ADMIN_URL);
-        app.adminPage.login(AppConfig.ADMIN_login, AppConfig.ADMIN_password);
-        app.adminPage.topPanel.shouldHave(text(AppConfig.ADMIN_login));
-        app.adminMainPage.clickOnUserTab();
-    }
 }

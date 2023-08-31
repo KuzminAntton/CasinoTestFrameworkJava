@@ -21,17 +21,6 @@ public abstract class BasePage {
         Selenide.open(url);
 //        Thread.sleep(4000);
         Wait().until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
-//        boolean networkRequestsCompleted = new WebDriverWait(WebDriverRunner.getWebDriver(), maxWaitTime)
-//                .until(driver -> {
-//                    Object result = ((JavascriptExecutor) driver)
-//                            .executeScript("return window.performance.getEntries().filter(entry => entry.initiatorType === 'fetch').length === 0");
-//                    return result instanceof Boolean && (Boolean) result;
-//                });
-//        if (networkRequestsCompleted) {
-//            System.out.println("Network requests completed within " + maxWaitTime + " seconds.");
-//        } else {
-//            System.out.println("Network requests did not complete within " + maxWaitTime + " seconds.");
-//        }
         Allure.step("open url : " + url);
     }
 

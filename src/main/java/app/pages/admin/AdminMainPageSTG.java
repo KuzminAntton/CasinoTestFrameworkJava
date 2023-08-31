@@ -11,10 +11,10 @@ public class AdminMainPageSTG extends BasePage {
         super(pageUrl);
     }
 
-    public SelenideElement usersTab = $x(".//a[contains(text(),'users')]");
+    public SelenideElement profileButton = $x(".//*[contains(@class, 'user-info')]");
 
-    public void clickOnUserTab() {
-        usersTab.waitUntil(visible, 5000).click();
+    public boolean isUserProfileDisplayed() {
+       return profileButton.waitUntil(visible, 5000).isDisplayed();
     }
 
 }

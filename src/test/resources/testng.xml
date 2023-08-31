@@ -7,9 +7,15 @@
         <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
     </listeners>
 
-    <test name="Tests">
+    <test name="STG77 login tests">
         <classes>
             <class name="casino.stg77.LogInTests" />
+        </classes>
+    </test>
+
+    <test name="Admin login tests">
+        <classes>
+            <class name="casino.admin.AdminTests" />
         </classes>
     </test>
 

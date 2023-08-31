@@ -11,15 +11,14 @@ public class AdminLoginPageSTG extends BasePage {
         super(pageUrl);
     }
 
-    public SelenideElement adminLogin = $x(".//input[@name='uName']");
-    public SelenideElement adminPassword = $x(".//input[@name='uPass']");
-    public SelenideElement submitButton = $x(".//input[@name='login']");
-    public SelenideElement topPanel = $(".topTD");
+    public SelenideElement adminLogin = $x(".//*[contains(@class, 'sb-user')]/ancestor::div[contains(@class, 'field-box')]//input");
+    public SelenideElement adminPassword = $x(".//*[contains(@class, 'sb-locked')]/ancestor::div[contains(@class, 'field-box')]//input");
+    public SelenideElement submitButton = $x(".//*[contains(@class, 'log-in-btn')]");
+
     public void login(String login, String password) {
         adminLogin.setValue(login);
         adminPassword.setValue(password);
         submitButton.click();
-        System.out.println();
     }
 
 
