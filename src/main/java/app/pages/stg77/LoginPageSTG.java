@@ -16,11 +16,11 @@ import static com.codeborne.selenide.Selenide.*;
 public class LoginPageSTG extends BasePage {
 
     public SelenideElement loginButton = $(".sign-in-box");
-    public SelenideElement loginField = $("#ember38");
-    public SelenideElement passwordField = $("#ember39");
+    public SelenideElement loginField = $x(".//*[contains(@class, 'sb-user')]/ancestor::div[contains(@class, 'field-box')]//input");
+    public SelenideElement passwordField = $x(".//*[contains(@class, 'sb-locked')]/ancestor::div[contains(@class, 'field-box')]//input");
     public SelenideElement signInButton = $x(".//*[contains(@class, 'log-in-btn')]");
 
-    public SelenideElement profileButton = $("#ember40");
+    public SelenideElement profileButton = $x(".//*[contains(@class, 'profile-btn')]");
 
     public SelenideElement loginErrorMessage = $x(".//*[contains(@title, 'Dismiss this notification')]");
 

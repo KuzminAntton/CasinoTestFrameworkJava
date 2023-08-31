@@ -1,14 +1,13 @@
 package app.pages.admin;
 
 import app.pages.BasePage;
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 
-public class AdminMainPage extends BasePage {
-    public AdminMainPage(String pageUrl) {
+public class AdminMainPageSTG extends BasePage {
+    public AdminMainPageSTG(String pageUrl) {
         super(pageUrl);
     }
 

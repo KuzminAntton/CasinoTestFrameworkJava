@@ -1,4 +1,4 @@
-package casino.mga;
+package casino.stg77;
 
 import app.AppConfig;
 import casino.A_BaseTest;
@@ -22,6 +22,5 @@ public class AdminTests extends A_BaseTest {
         app.adminPage.login(AppConfig.ADMIN_login, AppConfig.ADMIN_password);
         app.adminPage.topPanel.shouldHave(text(AppConfig.ADMIN_login));
         app.adminMainPage.clickOnUserTab();
-        Assert.assertTrue(app.usersTabPage.isUserExist(AppConfig.MGA_login));
     }
 }

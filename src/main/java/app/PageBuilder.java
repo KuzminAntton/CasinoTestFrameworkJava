@@ -1,9 +1,7 @@
 package app;
 
-import app.pages.admin.AdminLoginPage;
-import app.pages.admin.AdminMainPage;
-import app.pages.admin.tabs.UsersTabPage;
-import app.pages.mga.LoginPage;
+import app.pages.admin.AdminLoginPageSTG;
+import app.pages.admin.AdminMainPageSTG;
 import app.pages.stg77.LoginPageSTG;
 
 public class PageBuilder {
@@ -12,19 +10,12 @@ public class PageBuilder {
         return new LoginPageSTG("");
     }
 
-    public static LoginPage buildLoginPage() {
-        return new LoginPage("");
+    public static AdminLoginPageSTG buildAdminLoginPage() {
+        return new AdminLoginPageSTG("");
     }
 
-    public static AdminLoginPage buildAdminLoginPage() {
-        return new AdminLoginPage("");
+    public static AdminMainPageSTG buildAdminMainPage() {
+        return new AdminMainPageSTG("campaigns/leaderboard");
     }
 
-    public static AdminMainPage buildAdminMainPage() {
-        return new AdminMainPage("campaigns/leaderboard");
-    }
-
-    public static UsersTabPage buildUsersTabPage() {
-        return new UsersTabPage("users/user/");
-    }
 }

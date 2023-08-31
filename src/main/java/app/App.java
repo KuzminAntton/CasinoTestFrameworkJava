@@ -1,27 +1,20 @@
 package app;
 
-import app.pages.admin.AdminLoginPage;
-import app.pages.admin.AdminMainPage;
-import app.pages.admin.tabs.UsersTabPage;
-import app.pages.mga.LoginPage;
+import app.pages.admin.AdminLoginPageSTG;
+import app.pages.admin.AdminMainPageSTG;
 import app.pages.stg77.LoginPageSTG;
 
 public class App {
 
     public LoginPageSTG loginPageSTG;
 
-    public LoginPage loginPage;
-    public AdminLoginPage adminPage;
+    public AdminLoginPageSTG adminPage;
 
-    public AdminMainPage adminMainPage;
-
-    public UsersTabPage usersTabPage;
+    public AdminMainPageSTG adminMainPage;
 
     public App() {
         loginPageSTG = PageBuilder.buildLoginPageSTG();
-        loginPage = PageBuilder.buildLoginPage();
         adminPage = PageBuilder.buildAdminLoginPage();
         adminMainPage = PageBuilder.buildAdminMainPage();
-        usersTabPage = PageBuilder.buildUsersTabPage();
     }
 }

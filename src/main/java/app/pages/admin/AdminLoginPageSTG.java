@@ -6,8 +6,8 @@ import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
-public class AdminLoginPage extends BasePage {
-    public AdminLoginPage(String pageUrl) {
+public class AdminLoginPageSTG extends BasePage {
+    public AdminLoginPageSTG(String pageUrl) {
         super(pageUrl);
     }
 
